@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="JavaFX_Inventory_System_App">
+    <output-path>$PROJECT_DIR$/out/artifacts/JavaFX_Inventory_System_App</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="Main" />
+        <option name="description" value="" />
+        <option name="height" value="300" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+        <option name="width" value="500" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="JavaFX_Inventory_System_App.jar">
+        <element id="module-output" name="JavaFX_Inventory_System_App" />
+      </element>
+    </root>
+  </artifact>
+</component>

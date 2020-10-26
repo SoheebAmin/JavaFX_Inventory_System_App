@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="JavaFX_Files.MainScreenController">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX_Files.MainScreenController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -16,10 +15,10 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="300.0" prefWidth="500.0">
+      <AnchorPane prefHeight="500.0" prefWidth="800.0">
          <children>
             <Label layoutX="35.0" layoutY="20.0" text="Inventory" />
-            <Button layoutX="387.0" layoutY="207.0" mnemonicParsing="false" onAction="#setExitButton" text="Exit" />
+            <Button layoutX="710.0" layoutY="433.0" mnemonicParsing="false" onAction="#setExitButton" text="Exit" />
          </children>
       </AnchorPane>
    </children>

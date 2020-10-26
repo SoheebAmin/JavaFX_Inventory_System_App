@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="JavaFX_Inventory_System_App.jnlp">
+  <information>
+    <title>JavaFX_Inventory_System_App</title>
+    <vendor>Unknown</vendor>
+    <description>JavaFX_Inventory_System_App</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="JavaFX_Inventory_System_App.jar" size="2970" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="500" height="300" main-class="Main"  name="JavaFX_Inventory_System_App" />
+  <update check="background"/>
+</jnlp>
