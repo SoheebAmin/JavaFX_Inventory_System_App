@@ -29,7 +29,7 @@
             <Button layoutX="801.0" layoutY="447.0" mnemonicParsing="false" onAction="#setExitButton" text="Exit" />
             <SplitPane layoutX="14.0" layoutY="103.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="420.0">
                <items>
-                  <AnchorPane prefHeight="322.0" prefWidth="432.0">
+                  <AnchorPane prefHeight="322.0" prefWidth="445.0">
                      <children>
                         <Label layoutX="12.0" layoutY="18.0" text="Parts">
                            <font>
@@ -45,7 +45,7 @@
                               <TableColumn prefWidth="121.60001220703123" text="Price/Cost per Unit" />
                           </columns>
                         </TableView>
-                        <Button layoutX="192.0" layoutY="272.0" mnemonicParsing="false" text="Add" />
+                        <Button fx:id="addPartButton" layoutX="192.0" layoutY="272.0" mnemonicParsing="false" onAction="#addPartButtonClicked" text="Add" />
                         <Button layoutX="244.0" layoutY="272.0" mnemonicParsing="false" text="Modify" />
                         <Button layoutX="341.0" layoutY="272.0" mnemonicParsing="false" text="Delete" />
                      </children>
