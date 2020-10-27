@@ -40,6 +40,18 @@ public class MainScreenController implements Initializable{
 
     }
 
+    public void addProductButtonClicked(ActionEvent event) throws IOException {
+        // gets the scene to load and sets it in a variable
+        Parent AddProductParent = FXMLLoader.load(getClass().getResource(("AddProductGUI.fxml")));
+        Scene AddProductScene = new Scene(AddProductParent);
+
+        // sets new scene into the window
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();   // need this to get the stage info
+        window.setScene(AddProductScene);
+        window.show();
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
