@@ -27,17 +27,17 @@
       </VBox>
       <VBox layoutX="145.0" layoutY="69.0" prefHeight="138.0" prefWidth="100.0" spacing="12.0">
          <children>
-            <TextField />
-            <TextField />
-            <TextField />
-            <TextField />
+            <TextField fx:id="idText" />
+            <TextField fx:id="nameText" />
+            <TextField fx:id="inventoryText" />
+            <TextField fx:id="priceText" />
          </children>
       </VBox>
       <Label layoutX="145.0" layoutY="227.0" text="Min" />
-      <TextField layoutX="75.0" layoutY="222.0" prefHeight="26.0" prefWidth="54.0" />
-      <Button layoutX="525.0" layoutY="456.0" mnemonicParsing="false" text="Save" />
+      <TextField fx:id="minText" layoutX="75.0" layoutY="222.0" prefHeight="26.0" prefWidth="54.0" />
+      <Button layoutX="525.0" layoutY="456.0" mnemonicParsing="false" onAction="#saveButtonClicked" text="Save" />
       <Label layoutX="48.0" layoutY="227.0" text="Max" />
-      <TextField layoutX="169.0" layoutY="222.0" prefHeight="26.0" prefWidth="54.0" />
+      <TextField fx:id="maxText" layoutX="169.0" layoutY="222.0" prefHeight="26.0" prefWidth="54.0" />
       <TextField layoutX="423.0" layoutY="24.0" prefHeight="26.0" prefWidth="160.0" promptText="Search by Part ID or Name" />
       <TableView layoutX="319.0" layoutY="69.0" prefHeight="138.0" prefWidth="390.0">
          <columns>

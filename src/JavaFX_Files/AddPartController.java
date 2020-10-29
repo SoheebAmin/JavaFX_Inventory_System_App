@@ -50,9 +50,9 @@ public class AddPartController implements Initializable{
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();   // need this to get the stage info
         window.setScene(MainScreenScene);
         window.show();
-
-
     }
+
+
     // The method to cancel and return to the previous scene
     public void cancelButtonClicked(ActionEvent event) throws IOException {
         // gets the scene to load and sets it in a variable
