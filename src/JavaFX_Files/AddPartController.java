@@ -28,9 +28,30 @@ public class AddPartController implements Initializable{
     @FXML private TextField machineIdText;
 
 
-    public void saveButtonClicked(ActionEvent event) {
-        System.out.println("Saved!");
-        // TO DO
+
+    public void saveButtonClicked(ActionEvent event) throws IOException {
+
+        int id = Integer.parseInt(idText.getText());
+        String name = nameText.getText();
+        int inventory = Integer.parseInt(inventoryText.getText());
+        double price = Double.parseDouble(priceText.getText());
+        int min = Integer.parseInt(minText.getText());
+        int max = Integer.parseInt(maxText.getText());
+        int machineId = Integer.parseInt(machineIdText.getText());
+
+        // add it to the Inventory observable list, so it saved and displayed in GUI.
+        Inventory.addPart(new inHouse(id, name, price, inventory, min, max, machineId));
+
+        // gets the scene to load and sets it in a variable
+        Parent MainScreenParent = FXMLLoader.load(getClass().getResource(("MainScreenGUI.fxml")));
+        Scene MainScreenScene = new Scene(MainScreenParent);
+
+        // sets new scene into the window
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();   // need this to get the stage info
+        window.setScene(MainScreenScene);
+        window.show();
+
+
     }
     // The method to cancel and return to the previous scene
     public void cancelButtonClicked(ActionEvent event) throws IOException {
