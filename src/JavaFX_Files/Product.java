@@ -3,7 +3,7 @@ package JavaFX_Files;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public abstract class Product {
+public class Product {
 
     private static ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int id;

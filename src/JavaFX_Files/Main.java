@@ -25,14 +25,9 @@ public class Main extends Application {
         Inventory.addPart(part2);
 
         // creating the pre-placed objects from the products tableview.
-        Product product1 = new Product(1, "MotorCar", 120.05, 2, 1, 3) {
-        };
-        Product product2 = new Product(2, "RotorCar", 201.20, 5, 1, 3) {
-            @Override
-            public void setId(int id) {
-                super.setId(id);
-            }
-        };
+        Product product1 = new Product(1, "MotorCar", 120.05, 2, 1, 3);
+        Product product2 = new Product(2, "RotorCar", 201.20, 5, 1, 3);
+
         Inventory.addProduct(product1);
         Inventory.addProduct(product2);
 
