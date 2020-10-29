@@ -37,12 +37,12 @@
                            </font>
                         </Label>
                         <TextField layoutX="199.0" layoutY="14.0" prefHeight="26.0" prefWidth="182.0" promptText="Search by Part ID or Name" />
-                        <TableView layoutX="12.0" layoutY="55.0" prefHeight="200.0" prefWidth="386.0">
+                        <TableView fx:id="partsTableView" layoutX="12.0" layoutY="55.0" prefHeight="200.0" prefWidth="386.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Part ID" />
-                            <TableColumn prefWidth="75.0" text="Part Name" />
-                              <TableColumn prefWidth="113.5999755859375" text="Inventory Level" />
-                              <TableColumn prefWidth="121.60001220703123" text="Price/Cost per Unit" />
+                            <TableColumn fx:id="partIdCol" prefWidth="75.0" text="Part ID" />
+                            <TableColumn fx:id="partNameCol" prefWidth="75.0" text="Part Name" />
+                              <TableColumn fx:id="partStockCol" prefWidth="113.5999755859375" text="Inventory Level" />
+                              <TableColumn fx:id="partPricePerUnitCol" prefWidth="121.60001220703123" text="Price/Cost per Unit" />
                           </columns>
                         </TableView>
                         <Button fx:id="addPartButton" layoutX="192.0" layoutY="272.0" mnemonicParsing="false" onAction="#addPartButtonClicked" text="Add" />
@@ -62,12 +62,12 @@
                            </font>
                         </Label>
                         <TextField layoutX="205.0" layoutY="14.0" prefHeight="26.0" prefWidth="188.0" promptText="Search by Product ID or Name" />
-                        <TableView layoutX="12.0" layoutY="55.0" prefHeight="200.0" prefWidth="386.0">
+                        <TableView fx:id="productsTableView" layoutX="12.0" layoutY="55.0" prefHeight="200.0" prefWidth="386.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="Product ID" />
-                              <TableColumn prefWidth="75.0" text="Pr. Name" />
-                              <TableColumn prefWidth="113.5999755859375" text="Inventory Level" />
-                              <TableColumn prefWidth="121.60001220703123" text="Price/Cost per Unit" />
+                              <TableColumn fx:id="productIdCol" prefWidth="75.0" text="Product ID" />
+                              <TableColumn fx:id="productNameCol" prefWidth="75.0" text="Pr. Name" />
+                              <TableColumn fx:id="productStockCol" prefWidth="113.5999755859375" text="Inventory Level" />
+                              <TableColumn fx:id="productPricePerUnitCol" prefWidth="121.60001220703123" text="Price/Cost per Unit" />
                            </columns>
                         </TableView>
                         <Button layoutX="192.0" layoutY="272.0" mnemonicParsing="false" onAction="#addProductButtonClicked" text="Add" />

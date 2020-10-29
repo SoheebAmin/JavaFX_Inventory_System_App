@@ -18,6 +18,24 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        // creating the pre-placed objects from the parts tableview.
+        inHouse part1 = new inHouse(1, "Motor", 12.05, 2, 1, 3, 8689);
+        inHouse part2 = new inHouse(2, "Rotor", 21.10, 5, 1, 3, 0101);
+        Inventory.addPart(part1);
+        Inventory.addPart(part2);
+
+        // creating the pre-placed objects from the products tableview.
+        Product product1 = new Product(1, "MotorCar", 120.05, 2, 1, 3) {
+        };
+        Product product2 = new Product(2, "RotorCar", 201.20, 5, 1, 3) {
+            @Override
+            public void setId(int id) {
+                super.setId(id);
+            }
+        };
+        Inventory.addProduct(product1);
+        Inventory.addProduct(product2);
+
         launch(args);
     }
 }

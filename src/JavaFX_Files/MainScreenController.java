@@ -1,16 +1,14 @@
 package JavaFX_Files;
 
 import javafx.event.ActionEvent;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +17,19 @@ import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable{
 
+    // Variables for the Parts Table tableview and columns.
+    @FXML private TableView<Part> partsTableView;
+    @FXML private TableColumn<Part, Integer> partIdCol;
+    @FXML private TableColumn<Part, String> partNameCol;
+    @FXML private TableColumn<Part, Double> partPricePerUnitCol;
+    @FXML private TableColumn<Part, Integer> partStockCol;
+
+    // Variables for the Products Table tableview and columns.
+    @FXML private TableView<Product> productsTableView;
+    @FXML private TableColumn<Product, Integer> productIdCol;
+    @FXML private TableColumn<Product, String> productNameCol;
+    @FXML private TableColumn<Product, Double> productPricePerUnitCol;
+    @FXML private TableColumn<Product, Integer> productStockCol;
 
     @FXML private Button exitButton;
 
@@ -54,6 +65,24 @@ public class MainScreenController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // to populate the parts table
+        partsTableView.setItems(Inventory.getAllParts());
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
+
+        // to populate the product table
+        productsTableView.setItems(Inventory.getAllProducts());
+
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
 
     }
 }
