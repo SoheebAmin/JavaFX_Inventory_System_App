@@ -1,5 +1,6 @@
 package JavaFX_Files;
 
+import JavaFX_Files.Model.Inventory;
 import JavaFX_Files.Model.inHouse;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,5 +1,7 @@
-package JavaFX_Files;
+package JavaFX_Files.Model;
 
+import JavaFX_Files.Part;
+import JavaFX_Files.Product;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

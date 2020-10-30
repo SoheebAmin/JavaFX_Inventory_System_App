@@ -1,4 +1,4 @@
-package JavaFX_Files.Controller;
+package JavaFX_Files.Model;
 
 import JavaFX_Files.Part;
 

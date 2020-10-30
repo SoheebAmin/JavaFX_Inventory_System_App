@@ -1,5 +1,6 @@
 package JavaFX_Files;
 
+import JavaFX_Files.Model.Inventory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
