@@ -38,20 +38,17 @@ public class AddProductController implements Initializable{
         // add it to the Inventory observable list, so it saved and displayed in GUI.
         Inventory.addProduct(new Product(id, name, price, inventory, min, max));
 
-        changeScene(event, "MainScreenGUI.fxml");
+        changeScene(event, "View/MainScreenGUI.fxml");
     }
 
     public void cancelButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "MainScreenGUI.fxml");
+        changeScene(event, "View/MainScreenGUI.fxml");
     }
 
     public void changeScene(ActionEvent event, String sceneName) throws IOException {
-        // gets the scene to load and sets it in a variable
         Parent MainScreenParent = FXMLLoader.load(getClass().getResource((sceneName)));
         Scene MainScreenScene = new Scene(MainScreenParent);
-
-        // sets new scene into the window
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();   // need this to get the stage info
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(MainScreenScene);
         window.show();
     }

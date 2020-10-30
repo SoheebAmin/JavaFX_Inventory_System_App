@@ -41,7 +41,7 @@ public class MainScreenController implements Initializable{
 
     public void addPartButtonClicked(ActionEvent event) throws IOException {
         // gets the scene to load and sets it in a variable
-        Parent AddPartParent = FXMLLoader.load(getClass().getResource(("AddPartGUI.fxml")));
+        Parent AddPartParent = FXMLLoader.load(getClass().getResource(("View/AddPartGUI.fxml")));
         Scene AddPartScene = new Scene(AddPartParent);
 
         // sets new scene into the window
@@ -53,7 +53,7 @@ public class MainScreenController implements Initializable{
 
     public void addProductButtonClicked(ActionEvent event) throws IOException {
         // gets the scene to load and sets it in a variable
-        Parent AddProductParent = FXMLLoader.load(getClass().getResource(("AddProductGUI.fxml")));
+        Parent AddProductParent = FXMLLoader.load(getClass().getResource(("View/AddProductGUI.fxml")));
         Scene AddProductScene = new Scene(AddProductParent);
 
         // sets new scene into the window
