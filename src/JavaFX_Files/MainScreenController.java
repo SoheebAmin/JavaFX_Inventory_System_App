@@ -34,34 +34,32 @@ public class MainScreenController implements Initializable{
 
     @FXML private Button exitButton;
 
+
+
+
+    public void addPartButtonClicked(ActionEvent event) throws IOException {
+        changeScene(event, "View/AddPartGUI.fxml");
+    }
+
+    public  void deletePartButtonClicked(ActionEvent event) throws IOException {
+        changeScene(event, "View/DeletePartGUI.fxml");
+    }
+
+    public void addProductButtonClicked(ActionEvent event) throws IOException {
+        changeScene(event, "View/AddProductGUI.fxml");
+    }
+
+
     public void setExitButton(){
         System.exit(0);
     }
 
-    /* The all important code that actually allows us to change to a different scene! */
-
-    public void addPartButtonClicked(ActionEvent event) throws IOException {
-        // gets the scene to load and sets it in a variable
-        Parent AddPartParent = FXMLLoader.load(getClass().getResource(("View/AddPartGUI.fxml")));
-        Scene AddPartScene = new Scene(AddPartParent);
-
-        // sets new scene into the window
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();   // need this to get the stage info
-        window.setScene(AddPartScene);
+    public void changeScene(ActionEvent event, String sceneName) throws IOException {
+        Parent MainScreenParent = FXMLLoader.load(getClass().getResource((sceneName)));
+        Scene MainScreenScene = new Scene(MainScreenParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(MainScreenScene);
         window.show();
-
-    }
-
-    public void addProductButtonClicked(ActionEvent event) throws IOException {
-        // gets the scene to load and sets it in a variable
-        Parent AddProductParent = FXMLLoader.load(getClass().getResource(("View/AddProductGUI.fxml")));
-        Scene AddProductScene = new Scene(AddProductParent);
-
-        // sets new scene into the window
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();   // need this to get the stage info
-        window.setScene(AddProductScene);
-        window.show();
-
     }
 
     @Override
