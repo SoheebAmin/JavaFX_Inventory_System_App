@@ -34,8 +34,7 @@ public class MainScreenController implements Initializable{
 
     @FXML private Button exitButton;
 
-
-
+    /* Functions for Part Buttons */
 
     public void addPartButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddPartGUI.fxml");
@@ -45,8 +44,15 @@ public class MainScreenController implements Initializable{
         changeScene(event, "View/DeletePartGUI.fxml");
     }
 
+
+    /* Functions For Product Buttons */
+
     public void addProductButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddProductGUI.fxml");
+    }
+
+    public  void deleteProductButtonClicked(ActionEvent event) throws IOException {
+        changeScene(event, "View/DeleteProductGUI.fxml");
     }
 
 

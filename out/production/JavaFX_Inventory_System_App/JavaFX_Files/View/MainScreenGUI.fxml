@@ -72,7 +72,7 @@
                         </TableView>
                         <Button layoutX="192.0" layoutY="272.0" mnemonicParsing="false" onAction="#addProductButtonClicked" text="Add" />
                         <Button layoutX="244.0" layoutY="272.0" mnemonicParsing="false" text="Modify" />
-                        <Button layoutX="341.0" layoutY="272.0" mnemonicParsing="false" text="Delete" />
+                        <Button layoutX="341.0" layoutY="272.0" mnemonicParsing="false" onAction="#deleteProductButtonClicked" text="Delete" />
                      </children>
                   </AnchorPane>
                </items>
