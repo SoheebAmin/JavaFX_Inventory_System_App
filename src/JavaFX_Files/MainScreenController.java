@@ -36,25 +36,13 @@ public class MainScreenController implements Initializable{
     @FXML private Button exitButton;
 
     /* Functions for Part Buttons */
+
     public void addPartButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddPartGUI.fxml");
+
     }
     public  void deletePartButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/DeletePartGUI.fxml");
-    }
-
-
-    /* Functions For Product Buttons */
-    public void addProductButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/AddProductGUI.fxml");
-    }
-    public  void deleteProductButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/DeleteProductGUI.fxml");
-    }
-
-
-    public void setExitButton(){
-        System.exit(0);
     }
 
     // Search for parts
@@ -67,18 +55,8 @@ public class MainScreenController implements Initializable{
         return false;
     }
 
-    // Search for products
-    public boolean searchProduct(int id) {
-        for(Product product: Inventory.getAllProducts())
-        {
-            if(product.getId() == id)
-                return true;
-        }
-        return false;
-    }
-
-    // Update Part
-    public boolean update(int id, Part partToUpdate) {
+    // Update part
+    public boolean updatePart(int id, Part partToUpdate) {
 
         int indexCounter = 0; // counter to keep track of index
 
@@ -94,6 +72,65 @@ public class MainScreenController implements Initializable{
         return false;
     }
 
+    // Delete part
+    public boolean deletePart(int id) {
+        for(Part part : Inventory.getAllParts())
+        {
+            if (part.getId() == id)
+                return Inventory.getAllParts().remove(part);
+        }
+        return  false;
+    }
+
+    /* Functions For Product Buttons */
+    public void addProductButtonClicked(ActionEvent event) throws IOException {
+        changeScene(event, "View/AddProductGUI.fxml");
+    }
+    public  void deleteProductButtonClicked(ActionEvent event) throws IOException {
+        changeScene(event, "View/DeleteProductGUI.fxml");
+    }
+
+    // Search for products
+    public boolean searchProduct(int id) {
+        for(Product product: Inventory.getAllProducts())
+        {
+            if(product.getId() == id)
+                return true;
+        }
+        return false;
+    }
+
+    // Update product
+    public boolean updateProduct(int id, Product productToUpdate) {
+
+        int indexCounter = 0; // counter to keep track of index
+
+        for(Product product : Inventory.getAllProducts())
+        {
+            if(product.getId() == id)
+            {
+                Inventory.getAllProducts().set(indexCounter, productToUpdate);
+                return true;
+            }
+            indexCounter++;
+        }
+        return false;
+    }
+
+    // Delete part
+    public boolean deleteProduct(int id) {
+        for(Product product : Inventory.getAllProducts())
+        {
+            if (product.getId() == id)
+                return Inventory.getAllProducts().remove(product);
+        }
+        return  false;
+    }
+
+
+    public void setExitButton(){
+        System.exit(0);
+    }
 
     public void changeScene(ActionEvent event, String sceneName) throws IOException {
         Parent MainScreenParent = FXMLLoader.load(getClass().getResource((sceneName)));
@@ -123,10 +160,33 @@ public class MainScreenController implements Initializable{
         productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         productStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
-        if(update(1, new inHouse(1, "Bloator", 120.05, 20, 1, 3, 8689)))
+        /*
+       Testing methods commented out
+
+        if(updatePart(1, new inHouse(1, "Bloator", 120.05, 20, 1, 3, 8689)))
             System.out.println("Update Done, Son");
         else
             System.out.println("Fail");
+
+
+        if(deletePart(1))
+            System.out.println("Deleted");
+        else
+            System.out.println("No Match");
+
+
+        if(updateProduct(1, new Product(1, "BoatorCar", 9990.05, 2, 1, 3)))
+            System.out.println("Update Done, Son");
+        else
+            System.out.println("Fail");
+
+
+        if(deleteProduct(1))
+            System.out.println("Deleted");
+        else
+            System.out.println("No Match");
+
+         */
 
     }
 }
