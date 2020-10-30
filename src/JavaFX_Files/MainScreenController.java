@@ -1,6 +1,7 @@
 package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
+import JavaFX_Files.Model.inHouse;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,22 +36,18 @@ public class MainScreenController implements Initializable{
     @FXML private Button exitButton;
 
     /* Functions for Part Buttons */
-
     public void addPartButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddPartGUI.fxml");
     }
-
     public  void deletePartButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/DeletePartGUI.fxml");
     }
 
 
     /* Functions For Product Buttons */
-
     public void addProductButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddProductGUI.fxml");
     }
-
     public  void deleteProductButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/DeleteProductGUI.fxml");
     }
@@ -59,6 +56,44 @@ public class MainScreenController implements Initializable{
     public void setExitButton(){
         System.exit(0);
     }
+
+    // Search for parts
+    public boolean searchPart(int id) {
+        for(Part part : Inventory.getAllParts())
+        {
+            if(part.getId() == id)
+                return true;
+        }
+        return false;
+    }
+
+    // Search for products
+    public boolean searchProduct(int id) {
+        for(Product product: Inventory.getAllProducts())
+        {
+            if(product.getId() == id)
+                return true;
+        }
+        return false;
+    }
+
+    // Update Part
+    public boolean update(int id, Part partToUpdate) {
+
+        int indexCounter = 0; // counter to keep track of index
+
+        for(Part part : Inventory.getAllParts())
+        {
+            if(part.getId() == id)
+            {
+                Inventory.getAllParts().set(indexCounter, partToUpdate);
+                return true;
+            }
+            indexCounter++;
+        }
+        return false;
+    }
+
 
     public void changeScene(ActionEvent event, String sceneName) throws IOException {
         Parent MainScreenParent = FXMLLoader.load(getClass().getResource((sceneName)));
@@ -88,6 +123,10 @@ public class MainScreenController implements Initializable{
         productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         productStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
+        if(update(1, new inHouse(1, "Bloator", 120.05, 20, 1, 3, 8689)))
+            System.out.println("Update Done, Son");
+        else
+            System.out.println("Fail");
 
     }
 }
