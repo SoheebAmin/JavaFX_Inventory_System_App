@@ -1,4 +1,6 @@
-package JavaFX_Files;
+package JavaFX_Files.Controller;
+
+import JavaFX_Files.Part;
 
 public class Outsourced extends Part {
 

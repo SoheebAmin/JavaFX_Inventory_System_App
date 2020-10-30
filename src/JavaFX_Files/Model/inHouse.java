@@ -1,6 +1,8 @@
-package JavaFX_Files;
+package JavaFX_Files.Model;
 
-public class inHouse extends Part{
+import JavaFX_Files.Part;
+
+public class inHouse extends Part {
 
     private int machineId;
 
