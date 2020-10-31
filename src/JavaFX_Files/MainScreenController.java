@@ -33,7 +33,9 @@ public class MainScreenController implements Initializable{
     @FXML private TableColumn<Product, Double> productPricePerUnitCol;
     @FXML private TableColumn<Product, Integer> productStockCol;
 
-    @FXML private Button exitButton;
+    // Error Lables
+    @FXML private Label selectPartErrorLabel;
+    @FXML private Label selectProductErrorLabel;
 
     /* Functions for Part Buttons */
 
@@ -42,7 +44,7 @@ public class MainScreenController implements Initializable{
 
     }
 
-    public void modifyPartButtonClicked(ActionEvent event) throws IOException {
+    public int modifyPartButtonClicked(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("View/ModifyPartGUI.fxml"));
@@ -50,13 +52,20 @@ public class MainScreenController implements Initializable{
 
         // Send the data selected from the table view to the Modify Part Menu.
         ModifyPartController MPC = loader.getController();
-        MPC.sendPart(partsTableView.getSelectionModel().getSelectedItem());
+        try
+        {
+            MPC.sendPart(partsTableView.getSelectionModel().getSelectedItem());
+        } catch (Exception e) {
+            System.out.println("You need to select a part!");
+            return 1;
+        }
 
         // Creates new scene.
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         Parent scene = loader.getRoot();
         window.setScene(new Scene(scene));
         window.show();
+        return 0;
     }
 
     public  void deletePartButtonClicked(ActionEvent event) throws IOException {
@@ -142,6 +151,33 @@ public class MainScreenController implements Initializable{
     public  void deleteProductButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/DeleteProductGUI.fxml");
     }
+
+   /* NEED TO MAKE MODIFY PRODUCT CONTROLLER AND GUI
+    public int modifyProductButtonClicked(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("View/ModifyProductGUI.fxml"));
+        loader.load();
+
+
+        // Send the data selected from the table view to the Modify Part Menu.
+        ModifyProductController MPC = loader.getController();
+        try
+        {
+            MPC.sendProduct(partsTableView.getSelectionModel().getSelectedItem());
+        } catch (Exception e) {
+            System.out.println("You need to select a product!");
+            return 1;
+        }
+
+        // Creates new scene.
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Parent scene = loader.getRoot();
+        window.setScene(new Scene(scene));
+        window.show();
+        return 0;
+    }
+         */
 
     // Search for products
     public boolean searchProduct(int id) {

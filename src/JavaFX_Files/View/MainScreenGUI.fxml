@@ -77,6 +77,8 @@
                   </AnchorPane>
                </items>
             </SplitPane>
+            <Label fx:id="selectPartErrorLabel" layoutX="52.0" layoutY="438.0" />
+            <Label fx:id="selectProductErrorLabel" layoutX="480.0" layoutY="438.0" />
          </children>
       </AnchorPane>
    </children>
