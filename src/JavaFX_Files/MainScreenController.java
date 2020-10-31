@@ -56,7 +56,7 @@ public class MainScreenController implements Initializable{
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         Parent scene = loader.getRoot();
         window.setScene(new Scene(scene));
-        window.showAndWait();
+        window.show();
     }
 
     public  void deletePartButtonClicked(ActionEvent event) throws IOException {
