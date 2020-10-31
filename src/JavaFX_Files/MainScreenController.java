@@ -97,14 +97,12 @@ public class MainScreenController implements Initializable{
     public ObservableList<Part> filterPart(String criteria) {
         for(Part part : Inventory.getAllParts())
         {
-            System.out.println(part);
             if(part.getName().contains(criteria))
             {
                 Inventory.getFilteredParts().add(part);
             }
-            return Inventory.getFilteredParts();
         }
-        return null;
+        return Inventory.getFilteredParts();
     }
 
 
@@ -168,14 +166,12 @@ public class MainScreenController implements Initializable{
     public ObservableList<Product> filterProduct(String criteria) {
         for(Product product : Inventory.getAllProducts())
         {
-            System.out.println(product);
             if(product.getName().contains(criteria))
             {
                 Inventory.getFilteredProducts().add(product);
             }
-            return Inventory.getFilteredProducts();
         }
-        return null;
+        return Inventory.getFilteredProducts();
     }
 
 
@@ -197,7 +193,7 @@ public class MainScreenController implements Initializable{
 
         // to populate the parts table
         partsTableView.setItems(Inventory.getAllParts());
-        //partsTableView.setItems(filterPart("ot"));
+        //partsTableView.setItems(filterPart(""));
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -207,7 +203,7 @@ public class MainScreenController implements Initializable{
 
         // to populate the product table
         productsTableView.setItems(Inventory.getAllProducts());
-        //productsTableView.setItems(filterProduct(""));
+        // productsTableView.setItems(filterProduct("")); // to Filter for a specific product
 
 
 
