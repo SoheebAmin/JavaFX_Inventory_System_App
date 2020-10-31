@@ -42,6 +42,12 @@ public class MainScreenController implements Initializable{
         changeScene(event, "View/AddPartGUI.fxml");
 
     }
+
+    public void modifyPartButtonClicked(ActionEvent event) throws IOException {
+        changeScene(event, "View/ModifyPartGUI.fxml");
+
+    }
+
     public  void deletePartButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/DeletePartGUI.fxml");
     }
@@ -213,8 +219,8 @@ public class MainScreenController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // to populate the parts table
-        //partsTableView.setItems(Inventory.getAllParts());
-        partsTableView.setItems(filterPart("Mot"));
+        partsTableView.setItems(Inventory.getAllParts());
+        //partsTableView.setItems(filterPart("Mot"));
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -223,8 +229,8 @@ public class MainScreenController implements Initializable{
 
 
         // to populate the product table
-        // productsTableView.setItems(Inventory.getAllProducts());
-        productsTableView.setItems(filterProduct("X"));
+        productsTableView.setItems(Inventory.getAllProducts());
+        //productsTableView.setItems(filterProduct("X"));
 
 
 
