@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,20 +30,106 @@ public class AddPartController implements Initializable{
 
 
 
-    public void saveButtonClicked(ActionEvent event) throws IOException {
+    public int saveButtonClicked(ActionEvent event) throws IOException {
+        // initial values given since required if variables set in try blocks.
+        int id = 0;
+        int inventory = 0;
+        double price = 0;
+        int min = 0;
+        int max = 0;
+        int machineId = 0;
 
-        int id = Integer.parseInt(idText.getText());
+        boolean errorDetected = false;
+
+        // Check if ID is an int (if we disable auto-generate for the IDs)
+        try
+        {
+            id = Integer.parseInt(idText.getText());
+            errorDetected = true;
+        }
+        catch(NumberFormatException e)
+        {
+            errorDialogueBox("ID Error: Please enter a whole number");
+        }
+
+        // Check if String is not empty
         String name = nameText.getText();
-        int inventory = Integer.parseInt(inventoryText.getText());
-        double price = Double.parseDouble(priceText.getText());
-        int min = Integer.parseInt(minText.getText());
-        int max = Integer.parseInt(maxText.getText());
-        int machineId = Integer.parseInt(machineIdText.getText());
+        if(name.equals(""))
+        {
+            errorDialogueBox("Name Error: Please enter a name");
+            errorDetected = true;
+        }
+
+        // check if inventory is an int
+        try
+        {
+            inventory = Integer.parseInt(inventoryText.getText());
+        }
+        catch(NumberFormatException e)
+        {
+            errorDialogueBox("Inventory Error: Please enter a whole number");
+            errorDetected = true;
+        }
+
+        // check if double is a numerical value
+        try
+        {
+            price = Double.parseDouble(priceText.getText());
+        }
+        catch(NumberFormatException e)
+        {
+            errorDialogueBox("Price Error: Please enter a number");
+            errorDetected = true;
+        }
+
+        // check if min is an int
+        try
+        {
+            min = Integer.parseInt(minText.getText());
+        }
+        catch(NumberFormatException e)
+        {
+            errorDialogueBox("Min Error: Please enter a whole number");
+            errorDetected = true;
+        }
+
+        // check if max is an int
+        try
+        {
+            max = Integer.parseInt(maxText.getText());
+        }
+        catch(NumberFormatException e)
+        {
+            errorDialogueBox("Max Error: Please enter a whole number");
+            errorDetected = true;
+        }
+
+        // check if machine ID is an int
+        try
+        {
+            machineId = Integer.parseInt(machineIdText.getText());
+        }
+        catch(NumberFormatException e)
+        {
+            errorDialogueBox("Machine ID Error: Please enter a whole number");
+            errorDetected = true;
+        }
+
+        if(min > max) {
+            errorDialogueBox("Min cannot be lager than Max");
+        }
+
+        // check if any dialogue box was produced. If so, exit the function
+        if (errorDetected)
+        {
+            return 1;
+        }
 
         // add it to the Inventory observable list, so it saved and displayed in GUI.
         Inventory.addPart(new InHouse(id, name, price, inventory, min, max, machineId));
 
         changeScene(event, "View/MainScreenGUI.fxml");
+        return 0;
     }
 
 
@@ -57,6 +144,13 @@ public class AddPartController implements Initializable{
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(MainScreenScene);
         window.show();
+    }
+
+    private void errorDialogueBox(String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
     }
 
     @Override
