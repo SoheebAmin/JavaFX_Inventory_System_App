@@ -108,6 +108,11 @@ public class MainScreenController implements Initializable{
                 Inventory.getFilteredParts().add(part);
             }
         }
+        // checks to see if any results were found. If not, return original list.
+        if((Inventory.getFilteredParts().isEmpty()))
+        {
+            return Inventory.getAllParts();
+        }
         return Inventory.getFilteredParts();
     }
 
@@ -182,6 +187,11 @@ public class MainScreenController implements Initializable{
                 Inventory.getFilteredProducts().add(product);
             }
         }
+        // checks to see if any results were found. If not, return original list.
+        if((Inventory.getFilteredProducts().isEmpty()))
+        {
+            return Inventory.getAllProducts();
+        }
         return Inventory.getFilteredProducts();
     }
 
@@ -204,7 +214,7 @@ public class MainScreenController implements Initializable{
 
         // to populate the parts table
         //partsTableView.setItems(Inventory.getAllParts());
-        partsTableView.setItems(filterPart("Motor"));
+        partsTableView.setItems(filterPart("Mot"));
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -214,7 +224,7 @@ public class MainScreenController implements Initializable{
 
         // to populate the product table
         // productsTableView.setItems(Inventory.getAllProducts());
-        productsTableView.setItems(filterProduct("Ro"));
+        productsTableView.setItems(filterProduct("X"));
 
 
 
