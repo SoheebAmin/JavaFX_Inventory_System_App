@@ -45,7 +45,7 @@ public class MainScreenController implements Initializable{
         changeScene(event, "View/DeletePartGUI.fxml");
     }
 
-    // Search for parts
+    // Search for part
     public boolean searchPart(int id) {
         for(Part part : Inventory.getAllParts())
         {
@@ -81,6 +81,18 @@ public class MainScreenController implements Initializable{
         }
         return  false;
     }
+
+    // Select a part
+    public Part selectPart(int id) {
+        for(Part part : Inventory.getAllParts())
+        {
+            if(part.getId() == id)
+                return part;
+        }
+        return null;
+    }
+
+
 
     /* Functions For Product Buttons */
     public void addProductButtonClicked(ActionEvent event) throws IOException {
@@ -127,6 +139,17 @@ public class MainScreenController implements Initializable{
         return  false;
     }
 
+    // Select a product
+    public Product selectProduct(int id) {
+        for(Product product : Inventory.getAllProducts())
+        {
+            if(product.getId() == id)
+                return product;
+        }
+        return null;
+    }
+
+
 
     public void setExitButton(){
         System.exit(0);
@@ -160,8 +183,14 @@ public class MainScreenController implements Initializable{
         productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         productStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
+
+
         /*
        Testing methods commented out
+
+        partsTableView.getSelectionModel().select(selectPart(2));
+        productsTableView.getSelectionModel().select(selectProduct(2));
+
 
         if(updatePart(1, new inHouse(1, "Bloator", 120.05, 20, 1, 3, 8689)))
             System.out.println("Update Done, Son");
