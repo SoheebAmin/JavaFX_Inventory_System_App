@@ -1,7 +1,8 @@
 package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
-import JavaFX_Files.Model.inHouse;
+import JavaFX_Files.Model.InHouse;
+import JavaFX_Files.Model.Outsourced;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -18,7 +20,9 @@ import java.util.ResourceBundle;
 
 public class ModifyPartController implements Initializable{
 
-    // Variables for all GUI text fields
+    // Variables for Radio Buttons and GUI text fields
+    @FXML private RadioButton inHouseButton;
+    @FXML private RadioButton outsourcedButton;
     @FXML private TextField idText;
     @FXML private TextField nameText;
     @FXML private TextField inventoryText;
@@ -40,7 +44,7 @@ public class ModifyPartController implements Initializable{
         int machineId = Integer.parseInt(machineIdText.getText());
 
         // add it to the Inventory observable list, so it saved and displayed in GUI.
-        Inventory.addPart(new inHouse(id, name, price, inventory, min, max, machineId));
+        Inventory.addPart(new InHouse(id, name, price, inventory, min, max, machineId));
 
         changeScene(event, "View/MainScreenGUI.fxml");
     }
@@ -57,6 +61,28 @@ public class ModifyPartController implements Initializable{
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(MainScreenScene);
         window.show();
+    }
+
+    // method to get data from the main screen, if part is InHouse
+    public void sendPart(Part part) {
+        idText.setText(String.valueOf(part.getId()));
+        nameText.setText(part.getName());
+        inventoryText.setText(String.valueOf(part.getStock()));
+        priceText.setText(String.valueOf(part.getPrice()));
+        minText.setText(String.valueOf(part.getMin()));
+        maxText.setText(String.valueOf(part.getMax()));
+
+        if(part instanceof InHouse)
+        {
+            inHouseButton.setSelected(true);
+            machineIdText.setText(String.valueOf(((InHouse) part).getMachineId()));
+        }
+
+        if(part instanceof Outsourced)
+        {
+            outsourcedButton.setSelected(true);
+            machineIdText.setText(((Outsourced) part).getCompanyName());
+        }
     }
 
     @Override

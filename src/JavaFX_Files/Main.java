@@ -1,7 +1,8 @@
 package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
-import JavaFX_Files.Model.inHouse;
+import JavaFX_Files.Model.InHouse;
+import JavaFX_Files.Model.Outsourced;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,8 +23,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         // creating the pre-placed objects from the parts tableview.
-        Inventory.addPart(new inHouse(1, "Motor", 12.05, 2, 1, 3, 8689));
-        Inventory.addPart(new inHouse(2, "Rotor", 21.10, 5, 1, 3, 0101));
+        Inventory.addPart(new InHouse(1, "Motor", 12.05, 2, 1, 3, 8689));
+        Inventory.addPart(new InHouse(2, "Rotor", 21.10, 5, 1, 3, 6101));
+        Inventory.addPart(new Outsourced(3, "External Plywood", 9.99, 11, 1, 4, "Plywood Inc"));
 
         // creating the pre-placed objects from the products tableview.
         Inventory.addProduct(new Product(1, "MotorCar", 120.05, 2, 1, 3));

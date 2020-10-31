@@ -1,7 +1,6 @@
 package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
-import JavaFX_Files.Model.inHouse;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,8 +43,20 @@ public class MainScreenController implements Initializable{
     }
 
     public void modifyPartButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/ModifyPartGUI.fxml");
 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("View/ModifyPartGUI.fxml"));
+        loader.load();
+
+        // Send the data selected from the table view to the Modify Part Menu.
+        ModifyPartController MPC = loader.getController();
+        MPC.sendPart(partsTableView.getSelectionModel().getSelectedItem());
+
+        // Creates new scene.
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Parent scene = loader.getRoot();
+        window.setScene(new Scene(scene));
+        window.showAndWait();
     }
 
     public  void deletePartButtonClicked(ActionEvent event) throws IOException {

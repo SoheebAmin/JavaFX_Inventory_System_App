@@ -22,7 +22,7 @@
                 <ToggleGroup fx:id="addPartGroup" />
             </toggleGroup>
         </RadioButton>
-        <RadioButton fx:id="outsoucedButton" layoutX="229.0" layoutY="28.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$addPartGroup" />
+        <RadioButton fx:id="outsourcedButton" layoutX="229.0" layoutY="28.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$addPartGroup" />
         <VBox layoutX="71.0" layoutY="71.0" prefHeight="200.0" prefWidth="100.0" spacing="21.0">
             <children>
                 <Label text="ID" />

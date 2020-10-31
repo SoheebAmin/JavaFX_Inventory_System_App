@@ -1,7 +1,7 @@
 package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
-import JavaFX_Files.Model.inHouse;
+import JavaFX_Files.Model.InHouse;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +40,7 @@ public class AddPartController implements Initializable{
         int machineId = Integer.parseInt(machineIdText.getText());
 
         // add it to the Inventory observable list, so it saved and displayed in GUI.
-        Inventory.addPart(new inHouse(id, name, price, inventory, min, max, machineId));
+        Inventory.addPart(new InHouse(id, name, price, inventory, min, max, machineId));
 
         changeScene(event, "View/MainScreenGUI.fxml");
     }
