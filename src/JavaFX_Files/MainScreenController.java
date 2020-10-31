@@ -2,6 +2,7 @@ package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
 import JavaFX_Files.Model.inHouse;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -92,6 +93,20 @@ public class MainScreenController implements Initializable{
         return null;
     }
 
+    // Filter part list
+    public ObservableList<Part> filterPart(String criteria) {
+        for(Part part : Inventory.getAllParts())
+        {
+            System.out.println(part);
+            if(part.getName().contains(criteria))
+            {
+                Inventory.getFilteredParts().add(part);
+            }
+            return Inventory.getFilteredParts();
+        }
+        return null;
+    }
+
 
 
     /* Functions For Product Buttons */
@@ -149,6 +164,20 @@ public class MainScreenController implements Initializable{
         return null;
     }
 
+    // Filter product list
+    public ObservableList<Product> filterProduct(String criteria) {
+        for(Product product : Inventory.getAllProducts())
+        {
+            System.out.println(product);
+            if(product.getName().contains(criteria))
+            {
+                Inventory.getFilteredProducts().add(product);
+            }
+            return Inventory.getFilteredProducts();
+        }
+        return null;
+    }
+
 
 
     public void setExitButton(){
@@ -168,6 +197,7 @@ public class MainScreenController implements Initializable{
 
         // to populate the parts table
         partsTableView.setItems(Inventory.getAllParts());
+        //partsTableView.setItems(filterPart("ot"));
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -177,6 +207,9 @@ public class MainScreenController implements Initializable{
 
         // to populate the product table
         productsTableView.setItems(Inventory.getAllProducts());
+        //productsTableView.setItems(filterProduct(""));
+
+
 
         productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
