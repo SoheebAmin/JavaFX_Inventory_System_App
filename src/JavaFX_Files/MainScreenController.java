@@ -95,6 +95,12 @@ public class MainScreenController implements Initializable{
 
     // Filter part list
     public ObservableList<Part> filterPart(String criteria) {
+        // first, clear the filter if it needs to be
+        if(!(Inventory.getFilteredParts().isEmpty()))
+        {
+            Inventory.getFilteredParts().clear();
+        }
+        // if not, create it based on the criteria.
         for(Part part : Inventory.getAllParts())
         {
             if(part.getName().contains(criteria))
@@ -164,6 +170,11 @@ public class MainScreenController implements Initializable{
 
     // Filter product list
     public ObservableList<Product> filterProduct(String criteria) {
+        // first, clear the filter if it needs to be
+        if(!(Inventory.getFilteredProducts().isEmpty()))
+        {
+            Inventory.getFilteredProducts().clear();
+        }
         for(Product product : Inventory.getAllProducts())
         {
             if(product.getName().contains(criteria))
@@ -192,8 +203,8 @@ public class MainScreenController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // to populate the parts table
-        partsTableView.setItems(Inventory.getAllParts());
-        //partsTableView.setItems(filterPart(""));
+        //partsTableView.setItems(Inventory.getAllParts());
+        partsTableView.setItems(filterPart("Motor"));
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -202,8 +213,8 @@ public class MainScreenController implements Initializable{
 
 
         // to populate the product table
-        productsTableView.setItems(Inventory.getAllProducts());
-        // productsTableView.setItems(filterProduct("")); // to Filter for a specific product
+        // productsTableView.setItems(Inventory.getAllProducts());
+        productsTableView.setItems(filterProduct("Ro"));
 
 
 
