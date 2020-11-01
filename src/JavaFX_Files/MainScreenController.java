@@ -1,10 +1,6 @@
 package JavaFX_Files;
 
-import JavaFX_Files.Model.InHouse;
 import JavaFX_Files.Model.Inventory;
-import JavaFX_Files.ModifyPartController;
-import JavaFX_Files.Part;
-import JavaFX_Files.Product;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,15 +73,28 @@ public class MainScreenController implements Initializable{
         return 0;
     }
 
-    public  void deletePartButtonClicked(ActionEvent event) throws IOException {
+    public int deletePartButtonClicked() {
+        // grabs selected product
+        Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
+
+        //abort function if null
+        if(selectedPart == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("You need to select a part!");
+            alert.showAndWait();
+            return 1;
+        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this part?");
 
         Optional<ButtonType> result = alert.showAndWait();
 
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
-            System.out.println("Deleted! (not really)");
+            Inventory.deletePart(selectedPart);
         }
+        return 0;
     }
 
     // Search for part
@@ -98,16 +107,6 @@ public class MainScreenController implements Initializable{
         return false;
     }
 
-
-    // Delete part
-    public boolean deletePart(int id) {
-        for(Part part : Inventory.getAllParts())
-        {
-            if (part.getId() == id)
-                return Inventory.getAllParts().remove(part);
-        }
-        return  false;
-    }
 
     // Select a part
     public Part selectPart(int id) {
@@ -148,8 +147,7 @@ public class MainScreenController implements Initializable{
     public void addProductButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddProductGUI.fxml");
     }
-    public  int deleteProductButtonClicked(ActionEvent event) throws IOException {
-
+    public  int deleteProductButtonClicked() {
         // grabs selected product
         Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
 
@@ -168,6 +166,8 @@ public class MainScreenController implements Initializable{
 
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
+            // add logic to check if there's an associated part
+
             Inventory.deleteProduct(selectedProduct);
         }
         return 0;
@@ -209,33 +209,6 @@ public class MainScreenController implements Initializable{
                 return true;
         }
         return false;
-    }
-
-    // Update product
-    public boolean updateProduct(int id, Product productToUpdate) {
-
-        int indexCounter = 0; // counter to keep track of index
-
-        for(Product product : Inventory.getAllProducts())
-        {
-            if(product.getId() == id)
-            {
-                Inventory.getAllProducts().set(indexCounter, productToUpdate);
-                return true;
-            }
-            indexCounter++;
-        }
-        return false;
-    }
-
-    // Delete part
-    public boolean deleteProduct(int id) {
-        for(Product product : Inventory.getAllProducts())
-        {
-            if (product.getId() == id)
-                return Inventory.getAllProducts().remove(product);
-        }
-        return  false;
     }
 
     // Select a product

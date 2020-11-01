@@ -10,10 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,21 +29,30 @@ public class ModifyPartController implements Initializable{
     @FXML private TextField priceText;
     @FXML private TextField minText;
     @FXML private TextField maxText;
-    @FXML private TextField machineIdText;
+    @FXML private TextField machineIdOrCompanyLabelText;
+    @FXML private Label finalLabel;
 
+    public void changeToOutsourced() {
+        finalLabel.setText("Company Name");
+    }
+
+    public void changeToInHouse() {
+        finalLabel.setText("Machine ID");
+    }
 
 
     public int saveButtonClicked(ActionEvent event) throws IOException {
 
         /* First, values are checked since they may have been edited to incorrect formats */
 
-        // initial values given since required if variables set in try blocks.
+        // initial values given since required if variables set in if/try blocks.
         int id = 0;
         int inventory = 0;
         double price = 0;
         int min = 0;
         int max = 0;
         int machineId = 0;
+        String companyName = "";
         boolean errorDetected = false;
 
         // Check if ID is an int (if we disable auto-generate for the IDs)
@@ -102,13 +108,26 @@ public class ModifyPartController implements Initializable{
             errorDetected = true;
         }
 
-        // check if machine ID is an int
-        try {
-            machineId = Integer.parseInt(machineIdText.getText());
-        } catch (NumberFormatException e) {
-            errorDialogueBox("Machine ID Error: Please enter a whole number");
-            errorDetected = true;
+        // If in-house is selected, check if machine ID is an int
+        if(inHouseButton.isSelected()) {
+            try {
+                machineId = Integer.parseInt(machineIdOrCompanyLabelText.getText());
+            } catch (NumberFormatException e) {
+                errorDialogueBox("Machine ID Error: Please enter a whole number");
+                errorDetected = true;
+            }
         }
+        else
+        {
+            // If outsourced is selected, check if anything was entered
+            companyName = nameText.getText();
+            if (name.equals(""))
+            {
+                errorDialogueBox("Name Error: Please enter a company name");
+                errorDetected = true;
+            }
+        }
+
 
         // check if any dialogue box was produced. If so, exit the function
         if (errorDetected) {
@@ -123,10 +142,18 @@ public class ModifyPartController implements Initializable{
 
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
-            // add it to the Inventory observable list, so it saved and displayed in GUI.
+            // check to see if this is for an in-house or eternal part
+            if(inHouseButton.isSelected())
+            {
+                // update the part with the new info.
+                Inventory.updatePart(id, new InHouse(id, name, price, inventory, min, max, machineId));
 
-            Inventory.updatePart(id, new InHouse(id, name, price, inventory, min, max, machineId));
+            }
+            else
+            {
+                Inventory.updatePart(id, new Outsourced(id, name, price, inventory, min, max, companyName));
 
+            }
             changeScene(event, "View/MainScreenGUI.fxml");
         }
         return 0;
@@ -158,13 +185,15 @@ public class ModifyPartController implements Initializable{
         if(part instanceof InHouse)
         {
             inHouseButton.setSelected(true);
-            machineIdText.setText(String.valueOf(((InHouse) part).getMachineId()));
+            machineIdOrCompanyLabelText.setText(String.valueOf(((InHouse) part).getMachineId()));
+            finalLabel.setText("Machine ID");
         }
 
         if(part instanceof Outsourced)
         {
             outsourcedButton.setSelected(true);
-            machineIdText.setText(((Outsourced) part).getCompanyName());
+            machineIdOrCompanyLabelText.setText(((Outsourced) part).getCompanyName());
+            finalLabel.setText("Company Label");
         }
     }
 
@@ -177,7 +206,6 @@ public class ModifyPartController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }
 

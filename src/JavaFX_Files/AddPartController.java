@@ -2,6 +2,7 @@ package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
 import JavaFX_Files.Model.InHouse;
+import JavaFX_Files.Model.Outsourced;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,8 +30,15 @@ public class AddPartController implements Initializable{
     @FXML private TextField minText;
     @FXML private TextField maxText;
     @FXML private TextField machineIdText;
+    @FXML private Label finalLabel;
 
+    public void changeToOutsourced() {
+        finalLabel.setText("Company Name");
+    }
 
+    public void changeToInHouse() {
+        finalLabel.setText("Machine ID");
+    }
 
     public int saveButtonClicked(ActionEvent event) throws IOException {
         // initial values given since required if variables set in try blocks.
@@ -43,6 +48,7 @@ public class AddPartController implements Initializable{
         int min = 0;
         int max = 0;
         int machineId = 0;
+        String companyName = "";
 
         boolean errorDetected = false;
 
@@ -55,10 +61,10 @@ public class AddPartController implements Initializable{
             errorDetected = true;
         }
 
-        // Check if String is not empty
+        // Check if name is not empty
         String name = nameText.getText();
         if (name.equals("")) {
-            errorDialogueBox("Name Error: Please enter a name");
+            errorDialogueBox("Name Error: Please enter a part name");
             errorDetected = true;
         }
 
@@ -94,12 +100,24 @@ public class AddPartController implements Initializable{
             errorDetected = true;
         }
 
-        // check if machine ID is an int
-        try {
-            machineId = Integer.parseInt(machineIdText.getText());
-        } catch (NumberFormatException e) {
-            errorDialogueBox("Machine ID Error: Please enter a whole number");
-            errorDetected = true;
+        // If in-house is selected, check if machine ID is an int
+        if(inHouseButton.isSelected() == true) {
+            try {
+                machineId = Integer.parseInt(machineIdText.getText());
+            } catch (NumberFormatException e) {
+                errorDialogueBox("Machine ID Error: Please enter a whole number");
+                errorDetected = true;
+            }
+        }
+        else
+        {
+            // If outsourced is selected, check if anything was entered
+            companyName = nameText.getText();
+            if (name.equals(""))
+            {
+                errorDialogueBox("Name Error: Please enter a company name");
+                errorDetected = true;
+            }
         }
 
         if (min > max) {
@@ -120,9 +138,18 @@ public class AddPartController implements Initializable{
 
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
-            // add it to the Inventory observable list, so it saved and displayed in GUI.
-            Inventory.addPart(new InHouse(id, name, price, inventory, min, max, machineId));
+           // check to see if this is for an in-house or eternal part
+            if(inHouseButton.isSelected() == true)
+            {
+                // add it to the Inventory observable list, so it saved and displayed in GUI.
+                Inventory.addPart(new InHouse(id, name, price, inventory, min, max, machineId));
 
+            }
+            else
+            {
+                Inventory.addPart(new Outsourced(id, name, price, inventory, min, max, companyName));
+
+            }
             changeScene(event, "View/MainScreenGUI.fxml");
         }
         return 0;
@@ -153,6 +180,7 @@ public class AddPartController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // just to set a default
         inHouseButton.setSelected(true);
+
 
     }
 }

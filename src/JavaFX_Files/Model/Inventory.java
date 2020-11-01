@@ -56,7 +56,7 @@ public class Inventory {
         return false;
     }
 
-    // Update part
+    // Update product
     public static boolean updateProduct(int id, Product updatedProduct) {
 
         int indexCounter = 0; // counter to keep track of index
@@ -73,9 +73,16 @@ public class Inventory {
         return false;
     }
 
-    // Update part
+    // Delete part
+    public static void deletePart(Part partToDelete) {
+        Inventory.getAllParts().remove(partToDelete);
+    }
+
+    // Delete product
     public static void deleteProduct(Product productToDelete) {
         Inventory.getAllProducts().remove(productToDelete);
     }
+
+
 
 }
