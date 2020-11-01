@@ -40,7 +40,7 @@ public class Inventory {
     }
 
     // Update part
-    public static boolean updatePart(int id, Part partToUpdate) {
+    public static boolean updatePart(int id, Part updatedPart) {
 
         int indexCounter = 0; // counter to keep track of index
 
@@ -48,7 +48,24 @@ public class Inventory {
         {
             if(part.getId() == id)
             {
-                Inventory.getAllParts().set(indexCounter, partToUpdate);
+                Inventory.getAllParts().set(indexCounter, updatedPart);
+                return true;
+            }
+            indexCounter++;
+        }
+        return false;
+    }
+
+    // Update part
+    public static boolean updateProduct(int id, Product updatedProduct) {
+
+        int indexCounter = 0; // counter to keep track of index
+
+        for(Product product : Inventory.getAllProducts())
+        {
+            if(product.getId() == id)
+            {
+                Inventory.getAllProducts().set(indexCounter, updatedProduct);
                 return true;
             }
             indexCounter++;

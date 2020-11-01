@@ -159,21 +159,22 @@ public class MainScreenController implements Initializable{
         }
     }
 
-   /* NEED TO MAKE MODIFY PRODUCT CONTROLLER AND GUI
-    public int modifyProductButtonClicked(ActionEvent event) throws IOException {
 
+    public int modifyProductButtonClicked(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("View/ModifyProductGUI.fxml"));
         loader.load();
 
-
         // Send the data selected from the table view to the Modify Part Menu.
-        ModifyProductController MPC = loader.getController();
+        ModifyProductController MPrC = loader.getController();
         try
         {
-            MPC.sendProduct(partsTableView.getSelectionModel().getSelectedItem());
+            MPrC.sendProduct(productsTableView.getSelectionModel().getSelectedItem());
         } catch (Exception e) {
-            System.out.println("You need to select a product!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("You need to select a product!");
+            alert.showAndWait();
             return 1;
         }
 
@@ -184,7 +185,7 @@ public class MainScreenController implements Initializable{
         window.show();
         return 0;
     }
-         */
+
 
     // Search for products
     public boolean searchProduct(int id) {
