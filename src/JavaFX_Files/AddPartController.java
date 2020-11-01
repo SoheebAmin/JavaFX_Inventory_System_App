@@ -47,83 +47,66 @@ public class AddPartController implements Initializable{
         try
         {
             id = Integer.parseInt(idText.getText());
-            errorDetected = true;
-        }
-        catch(NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             errorDialogueBox("ID Error: Please enter a whole number");
+            errorDetected = true;
         }
 
         // Check if String is not empty
         String name = nameText.getText();
-        if(name.equals(""))
-        {
+        if (name.equals("")) {
             errorDialogueBox("Name Error: Please enter a name");
             errorDetected = true;
         }
 
         // check if inventory is an int
-        try
-        {
+        try {
             inventory = Integer.parseInt(inventoryText.getText());
-        }
-        catch(NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             errorDialogueBox("Inventory Error: Please enter a whole number");
             errorDetected = true;
         }
 
         // check if double is a numerical value
-        try
-        {
+        try {
             price = Double.parseDouble(priceText.getText());
-        }
-        catch(NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             errorDialogueBox("Price Error: Please enter a number");
             errorDetected = true;
         }
 
         // check if min is an int
-        try
-        {
+        try {
             min = Integer.parseInt(minText.getText());
-        }
-        catch(NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             errorDialogueBox("Min Error: Please enter a whole number");
             errorDetected = true;
         }
 
         // check if max is an int
-        try
-        {
+        try {
             max = Integer.parseInt(maxText.getText());
-        }
-        catch(NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             errorDialogueBox("Max Error: Please enter a whole number");
             errorDetected = true;
         }
 
         // check if machine ID is an int
-        try
-        {
+        try {
             machineId = Integer.parseInt(machineIdText.getText());
-        }
-        catch(NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             errorDialogueBox("Machine ID Error: Please enter a whole number");
             errorDetected = true;
         }
 
-        if(min > max) {
+        if (min > max) {
             errorDialogueBox("Min cannot be lager than Max");
+            errorDetected = true;
         }
 
         // check if any dialogue box was produced. If so, exit the function
-        if (errorDetected)
-        {
+        if (errorDetected) {
+            System.out.println("Error Detected");
             return 1;
         }
 
@@ -132,10 +115,13 @@ public class AddPartController implements Initializable{
 
         Optional<ButtonType> result = alert.showAndWait();
 
-        // add it to the Inventory observable list, so it saved and displayed in GUI.
-        Inventory.addPart(new InHouse(id, name, price, inventory, min, max, machineId));
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            // add it to the Inventory observable list, so it saved and displayed in GUI.
+            Inventory.addPart(new InHouse(id, name, price, inventory, min, max, machineId));
 
-        changeScene(event, "View/MainScreenGUI.fxml");
+            changeScene(event, "View/MainScreenGUI.fxml");
+        }
         return 0;
     }
 
