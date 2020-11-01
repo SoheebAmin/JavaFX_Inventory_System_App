@@ -9,9 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,9 +20,15 @@ import java.util.ResourceBundle;
 
 public class AddProductController implements Initializable{
 
+    //Variables for the Parts TableView
+    @FXML private TableView<Part> partsTableView;
+    @FXML private TableColumn<Part, Integer> partIdCol;
+    @FXML private TableColumn<Part, String> partNameCol;
+    @FXML private TableColumn<Part, Double> partPricePerUnitCol;
+    @FXML private TableColumn<Part, Integer> partStockCol;
+
     // Variables for all GUI text fields
-    @FXML
-    private TextField idText;
+    @FXML private TextField idText;
     @FXML private TextField nameText;
     @FXML private TextField inventoryText;
     @FXML private TextField priceText;
@@ -135,6 +140,12 @@ public class AddProductController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        partsTableView.setItems(Inventory.getAllParts());
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
     }
 }

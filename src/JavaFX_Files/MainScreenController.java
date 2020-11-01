@@ -34,10 +34,6 @@ public class MainScreenController implements Initializable{
     @FXML private TableColumn<Product, Double> productPricePerUnitCol;
     @FXML private TableColumn<Product, Integer> productStockCol;
 
-    // Error Labels
-    @FXML private Label selectPartErrorLabel;
-    @FXML private Label selectProductErrorLabel;
-
     /* Functions for Part Buttons */
 
     public void addPartButtonClicked(ActionEvent event) throws IOException {
@@ -255,6 +251,10 @@ public class MainScreenController implements Initializable{
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(MainScreenScene);
         window.show();
+    }
+
+    public static TableView<Part> getPartsTableView() {
+        return null;
     }
 
     @Override

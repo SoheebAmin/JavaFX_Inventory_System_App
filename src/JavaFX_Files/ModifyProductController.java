@@ -8,9 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +17,13 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ModifyProductController implements Initializable{
+
+    //Variables for the Parts TableView
+    @FXML private TableView<Part> partsTableView;
+    @FXML private TableColumn<Part, Integer> partIdCol;
+    @FXML private TableColumn<Part, String> partNameCol;
+    @FXML private TableColumn<Part, Double> partPricePerUnitCol;
+    @FXML private TableColumn<Part, Integer> partStockCol;
 
     // Variables for Radio Buttons and GUI text fields
     @FXML private TextField idText;
@@ -149,6 +154,7 @@ public class ModifyProductController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        partsTableView.setItems(Inventory.getAllParts());
 
     }
 }
