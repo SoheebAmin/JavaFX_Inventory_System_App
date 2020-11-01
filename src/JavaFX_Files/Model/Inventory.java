@@ -38,4 +38,22 @@ public class Inventory {
     public static ObservableList<Product> getFilteredProducts() {
         return filteredProducts;
     }
+
+    // Update part
+    public static boolean updatePart(int id, Part partToUpdate) {
+
+        int indexCounter = 0; // counter to keep track of index
+
+        for(Part part : Inventory.getAllParts())
+        {
+            if(part.getId() == id)
+            {
+                Inventory.getAllParts().set(indexCounter, partToUpdate);
+                return true;
+            }
+            indexCounter++;
+        }
+        return false;
+    }
+
 }

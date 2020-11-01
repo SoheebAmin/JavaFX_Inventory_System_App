@@ -59,9 +59,13 @@ public class MainScreenController implements Initializable{
         ModifyPartController MPC = loader.getController();
         try
         {
-            MPC.sendPart(partsTableView.getSelectionModel().getSelectedItem());
+            Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
+            MPC.sendPart(selectedPart);
         } catch (Exception e) {
-            System.out.println("You need to select a part!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("You need to select a part!");
+            alert.showAndWait();
             return 1;
         }
 
@@ -94,22 +98,6 @@ public class MainScreenController implements Initializable{
         return false;
     }
 
-    // Update part
-    public boolean updatePart(int id, Part partToUpdate) {
-
-        int indexCounter = 0; // counter to keep track of index
-
-        for(Part part : Inventory.getAllParts())
-        {
-            if(part.getId() == id)
-            {
-                Inventory.getAllParts().set(indexCounter, partToUpdate);
-                return true;
-            }
-            indexCounter++;
-        }
-        return false;
-    }
 
     // Delete part
     public boolean deletePart(int id) {
@@ -304,6 +292,7 @@ public class MainScreenController implements Initializable{
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         productStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
 
 
 

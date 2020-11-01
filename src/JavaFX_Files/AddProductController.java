@@ -96,7 +96,6 @@ public class AddProductController implements Initializable{
 
         // check if any dialogue box was produced. If so, exit the function
         if (errorDetected) {
-            System.out.println("Error Detected");
             return 1;
         }
 
