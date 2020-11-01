@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -21,7 +22,9 @@ import java.util.ResourceBundle;
 
 public class AddPartController implements Initializable{
 
-    // Variables for all GUI text fields
+    // Variables for Radio Buttons and GUI text fields
+    @FXML private RadioButton inHouseButton;
+    @FXML private RadioButton outsourcedButton;
     @FXML private TextField idText;
     @FXML private TextField nameText;
     @FXML private TextField inventoryText;
@@ -148,6 +151,8 @@ public class AddPartController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // just to set a default
+        inHouseButton.setSelected(true);
 
     }
 }

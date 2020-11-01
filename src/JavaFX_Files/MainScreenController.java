@@ -1,6 +1,10 @@
 package JavaFX_Files;
 
+import JavaFX_Files.Model.InHouse;
 import JavaFX_Files.Model.Inventory;
+import JavaFX_Files.ModifyPartController;
+import JavaFX_Files.Part;
+import JavaFX_Files.Product;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable{
@@ -33,7 +38,7 @@ public class MainScreenController implements Initializable{
     @FXML private TableColumn<Product, Double> productPricePerUnitCol;
     @FXML private TableColumn<Product, Integer> productStockCol;
 
-    // Error Lables
+    // Error Labels
     @FXML private Label selectPartErrorLabel;
     @FXML private Label selectProductErrorLabel;
 
@@ -69,7 +74,14 @@ public class MainScreenController implements Initializable{
     }
 
     public  void deletePartButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/DeletePartGUI.fxml");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this part?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            System.out.println("Deleted! (not really)");
+        }
     }
 
     // Search for part
@@ -149,7 +161,14 @@ public class MainScreenController implements Initializable{
         changeScene(event, "View/AddProductGUI.fxml");
     }
     public  void deleteProductButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/DeleteProductGUI.fxml");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this product?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            System.out.println("Deleted! (not really)");
+        }
     }
 
    /* NEED TO MAKE MODIFY PRODUCT CONTROLLER AND GUI
