@@ -70,7 +70,7 @@ public class MainScreenController implements Initializable{
     }
 
     public int deletePartButtonClicked() {
-        // grabs selected product
+        // grabs selected part
         Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
 
         //abort function if null
@@ -251,10 +251,6 @@ public class MainScreenController implements Initializable{
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(MainScreenScene);
         window.show();
-    }
-
-    public static TableView<Part> getPartsTableView() {
-        return null;
     }
 
     @Override

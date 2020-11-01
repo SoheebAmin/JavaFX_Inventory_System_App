@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -154,7 +155,14 @@ public class ModifyProductController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // grabs the parts tableviews
         partsTableView.setItems(Inventory.getAllParts());
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
 
     }
 }

@@ -1,6 +1,5 @@
 package JavaFX_Files;
 
-import JavaFX_Files.Model.InHouse;
 import JavaFX_Files.Model.Inventory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +33,26 @@ public class AddProductController implements Initializable{
     @FXML private TextField priceText;
     @FXML private TextField minText;
     @FXML private TextField maxText;
+
+    public int addButtonClicked() {
+        // grabs selected part
+        Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
+
+        //abort function if null
+        if(selectedPart == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("You need to select a part!");
+            alert.showAndWait();
+            return 1;
+        }
+        else
+        {
+            System.out.println(selectedPart);
+        }
+        return 0;
+    }
 
 
     public int saveButtonClicked(ActionEvent event) throws IOException {
@@ -140,6 +159,8 @@ public class AddProductController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // grabs the parts tableviews
         partsTableView.setItems(Inventory.getAllParts());
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
