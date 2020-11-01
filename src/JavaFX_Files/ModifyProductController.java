@@ -34,6 +34,26 @@ public class ModifyProductController implements Initializable{
     @FXML private TextField minText;
     @FXML private TextField maxText;
 
+    public int addButtonClicked() {
+        // grabs selected part
+        Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
+
+        //abort function if null
+        if(selectedPart == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("You need to select a part!");
+            alert.showAndWait();
+            return 1;
+        }
+        else
+        {
+            System.out.println(selectedPart);
+        }
+        return 0;
+    }
+
     public int saveButtonClicked(ActionEvent event) throws IOException {
 
         /* First, values are checked since they may have been edited to incorrect formats */

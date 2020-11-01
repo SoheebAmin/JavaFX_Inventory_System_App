@@ -47,7 +47,7 @@
             <TableColumn fx:id="partPricePerUnitCol" prefWidth="83.0" text="Price/Cost" />
          </columns>
       </TableView>
-      <Button layoutX="671.0" layoutY="214.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
+      <Button layoutX="665.0" layoutY="215.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
       <Button layoutX="566.0" layoutY="404.0" mnemonicParsing="false" text="Remove Associated Part" />
       <TableView fx:id="partsTableView1" layoutX="319.0" layoutY="266.0" prefHeight="138.0" prefWidth="390.0">
          <columns>

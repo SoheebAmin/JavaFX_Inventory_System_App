@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX_Files.ModifyProductController">
+<AnchorPane prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX_Files.ModifyProductController">
     <children>
         <Button fx:id="cancelButton" layoutX="601.0" layoutY="456.0" mnemonicParsing="false" onAction="#cancelButtonClicked" text="Cancel" />
         <Label layoutX="44.0" layoutY="24.0" text="Add Product">
@@ -47,7 +47,7 @@
                 <TableColumn fx:id="partPricePerUnitCol" prefWidth="86.0" text="Price/Cost" />
             </columns>
         </TableView>
-        <Button layoutX="671.0" layoutY="214.0" mnemonicParsing="false" text="Add" />
+        <Button layoutX="671.0" layoutY="214.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
         <Button layoutX="566.0" layoutY="404.0" mnemonicParsing="false" text="Remove Associated Part" />
       <TableView fx:id="partsTableView1" layoutX="319.0" layoutY="244.0" prefHeight="138.0" prefWidth="390.0">
          <columns>
