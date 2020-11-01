@@ -148,15 +148,29 @@ public class MainScreenController implements Initializable{
     public void addProductButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddProductGUI.fxml");
     }
-    public  void deleteProductButtonClicked(ActionEvent event) throws IOException {
+    public  int deleteProductButtonClicked(ActionEvent event) throws IOException {
+
+        // grabs selected product
+        Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
+
+        //abort function if null
+        if(selectedProduct == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("You need to select a product!");
+            alert.showAndWait();
+            return 1;
+        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this product?");
 
         Optional<ButtonType> result = alert.showAndWait();
 
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
-            System.out.println("Deleted! (not really)");
+            Inventory.deleteProduct(selectedProduct);
         }
+        return 0;
     }
 
 

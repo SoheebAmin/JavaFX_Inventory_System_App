@@ -73,4 +73,9 @@ public class Inventory {
         return false;
     }
 
+    // Update part
+    public static void deleteProduct(Product productToDelete) {
+        Inventory.getAllProducts().remove(productToDelete);
+    }
+
 }
