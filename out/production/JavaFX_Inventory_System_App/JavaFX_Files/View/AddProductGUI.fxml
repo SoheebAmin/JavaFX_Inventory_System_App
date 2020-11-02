@@ -48,7 +48,7 @@
          </columns>
       </TableView>
       <Button layoutX="665.0" layoutY="215.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
-      <Button layoutX="566.0" layoutY="404.0" mnemonicParsing="false" text="Remove Associated Part" />
+      <Button layoutX="566.0" layoutY="404.0" mnemonicParsing="false" onAction="#removeButtonClicked" text="Remove Associated Part" />
       <TableView fx:id="aPartsTableView" layoutX="319.0" layoutY="266.0" prefHeight="138.0" prefWidth="390.0">
          <columns>
             <TableColumn fx:id="aPartIdCol" prefWidth="50.0" text="Part ID" />

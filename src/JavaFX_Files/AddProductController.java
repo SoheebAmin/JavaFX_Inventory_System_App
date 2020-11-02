@@ -56,24 +56,49 @@ public class AddProductController implements Initializable{
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setContentText("You need to select a part!");
+            alert.setContentText("You need to select a part to add!");
             alert.showAndWait();
             return 1;
         }
-        else
-        {
-            partsBuffer.add(selectedPart);
+        // adds selected parts to the buffer
+        partsBuffer.add(selectedPart);
 
-            // shows the associated parts buffer
-            aPartsTableView.setItems(partsBuffer);
+        // shows the updated associated parts buffer
+        aPartsTableView.setItems(partsBuffer);
 
-            aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-            aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-            aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-            aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-
-        }
+        aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         return 0;
+    }
+
+    public int removeButtonClicked() {
+        // grabs selected part
+        Part selectedPart = aPartsTableView.getSelectionModel().getSelectedItem();
+
+        //abort function if null
+        if(selectedPart == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("You need to select a part to remove!");
+            alert.showAndWait();
+            return 1;
+        }
+        // removes selected parts to the buffer
+        partsBuffer.remove(selectedPart);
+        System.out.println(partsBuffer);
+
+        // shows the updated associated parts buffer
+        aPartsTableView.setItems(partsBuffer);
+
+        aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        return 0;
+
     }
 
 
@@ -157,7 +182,7 @@ public class AddProductController implements Initializable{
 
             Inventory.addProduct(newProduct);
 
-            // check parts buffer for parts. If there, add them to the product
+            // check parts buffer for parts. If there are any, add them to the product
             if(!partsBuffer.isEmpty())
             {
                 newProduct.setAllAssociatedParts(partsBuffer);
