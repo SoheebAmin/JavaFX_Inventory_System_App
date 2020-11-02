@@ -199,10 +199,10 @@ public class ModifyProductController implements Initializable{
         // display the associated parts
         aPartsTableView.setItems(currentProduct.getAllAssociatedParts());
 
-        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
         // grabs the parts tableviews
         partsTableView.setItems(Inventory.getAllParts());
