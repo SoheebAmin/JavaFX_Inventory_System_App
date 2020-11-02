@@ -160,12 +160,8 @@ public class AddProductController implements Initializable{
             // check parts buffer for parts. If there, add them to the product
             if(!partsBuffer.isEmpty())
             {
-                for(Part bufferedPart : partsBuffer)
-                {
-                    newProduct.addAssociatedPart(bufferedPart);
-                }
+                newProduct.setAllAssociatedParts(partsBuffer);
             }
-
             changeScene(event, "View/MainScreenGUI.fxml");
         }
         return 0;

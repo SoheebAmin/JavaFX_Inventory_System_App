@@ -46,6 +46,7 @@ public class ModifyProductController implements Initializable{
     @FXML private TextField minText;
     @FXML private TextField maxText;
 
+    // get the object that is being worked on from the Main Screen Controller.
     private static Product currentProduct = null;
     public static void getCurrentProduct(Product product) {
         currentProduct = product;
@@ -192,9 +193,10 @@ public class ModifyProductController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("The current item is" + currentProduct.getName());
-
-        System.out.println("The associated parts are" + currentProduct.getAllAssociatedParts());
+        // sets them in a buffer for the user to work with
+        //partsBuffer = currentProduct.getAllAssociatedParts();
+        System.out.println("The current product is " + currentProduct.getName());
+        System.out.println("The parts are " + currentProduct.getAllAssociatedParts());
 
         // display the associated parts
         aPartsTableView.setItems(currentProduct.getAllAssociatedParts());

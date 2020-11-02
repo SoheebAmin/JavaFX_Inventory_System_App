@@ -170,34 +170,34 @@ public class MainScreenController implements Initializable{
     }
 
     public int modifyProductButtonClicked(ActionEvent event) throws IOException {
-        Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
-        ModifyProductController.getCurrentProduct(selectedProduct);
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("View/ModifyProductGUI.fxml"));
-        loader.load();
-
-        // Send the data selected from the table view to the Modify Part Menu.
-        ModifyProductController MPrC = loader.getController();
         try
         {
+            Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
+            ModifyProductController.getCurrentProduct(selectedProduct);
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("View/ModifyProductGUI.fxml"));
+            loader.load();
+
+            // Send the data selected from the table view to the Modify Part Menu.
+            ModifyProductController MPrC = loader.getController();
             MPrC.getCurrentProduct(selectedProduct);
             MPrC.sendProduct(selectedProduct);
 
+            // Creates new scene.
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            window.setScene(new Scene(scene));
+            window.show();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText("You need to select a product!");
             alert.showAndWait();
             return 1;
         }
-
-        // Creates new scene.
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Parent scene = loader.getRoot();
-        window.setScene(new Scene(scene));
-        window.show();
         return 0;
     }
 
