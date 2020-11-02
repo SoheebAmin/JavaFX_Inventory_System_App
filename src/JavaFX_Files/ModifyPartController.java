@@ -53,7 +53,9 @@ public class ModifyPartController implements Initializable{
         int max = 0;
         int machineId = 0;
         String companyName = "";
+
         boolean errorDetected = false;
+        boolean mixOrMaxInvalid = false;
 
         // Check if ID is an int (if we disable auto-generate for the IDs)
         try
@@ -93,6 +95,7 @@ public class ModifyPartController implements Initializable{
         } catch (NumberFormatException e) {
             errorDialogueBox("Min Error: Please enter a whole number");
             errorDetected = true;
+            mixOrMaxInvalid = true;
         }
 
         // check if max is an int
@@ -101,10 +104,11 @@ public class ModifyPartController implements Initializable{
         } catch (NumberFormatException e) {
             errorDialogueBox("Max Error: Please enter a whole number");
             errorDetected = true;
+            mixOrMaxInvalid = true;
         }
 
-        if (min > max) {
-            errorDialogueBox("Min cannot be lager than Max");
+        if (min > max && !mixOrMaxInvalid) {
+            errorDialogueBox("Min cannot be larger than Max");
             errorDetected = true;
         }
 
@@ -131,7 +135,6 @@ public class ModifyPartController implements Initializable{
 
         // check if any dialogue box was produced. If so, exit the function
         if (errorDetected) {
-            System.out.println("Error Detected");
             return 1;
         }
 

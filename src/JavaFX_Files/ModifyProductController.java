@@ -29,7 +29,7 @@ public class ModifyProductController implements Initializable{
     @FXML private TableColumn<Part, Integer> partStockCol;
 
     //a buffer that will hold parts being added or removed
-    private ObservableList<Part> partsBuffer = FXCollections.observableArrayList();
+    private ObservableList<Part> partsBuffer = currentProduct.getAllAssociatedParts();
 
     //Variables for the Associated Parts TableView
     @FXML private TableView<Part> aPartsTableView;
@@ -65,24 +65,58 @@ public class ModifyProductController implements Initializable{
             alert.showAndWait();
             return 1;
         }
-        else
-        {
-            System.out.println(selectedPart);
-        }
+        // adds selected parts to the buffer
+        partsBuffer.add(selectedPart);
+
+        // shows the updated associated parts buffer
+        aPartsTableView.setItems(partsBuffer);
+
+        aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         return 0;
+    }
+
+    public int removeButtonClicked() {
+        // grabs selected part
+        Part selectedPart = aPartsTableView.getSelectionModel().getSelectedItem();
+
+        //abort function if null
+        if(selectedPart == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("You need to select a part to remove!");
+            alert.showAndWait();
+            return 1;
+        }
+        // removes selected parts to the buffer
+        partsBuffer.remove(selectedPart);
+
+        // shows the updated associated parts buffer
+        aPartsTableView.setItems(partsBuffer);
+
+        aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        return 0;
+
     }
 
     public int saveButtonClicked(ActionEvent event) throws IOException {
 
         /* First, values are checked since they may have been edited to incorrect formats */
 
-        // initial values given since required if variables set in try blocks.
+        // initial values given since required if variables set in if/try blocks.
         int id = 0;
         int inventory = 0;
         double price = 0;
         int min = 0;
         int max = 0;
-        boolean errorDetected = false;
+        boolean errorDetected = false; // to let the function know to terminate once errors are displayed
+        boolean mixOrMaxInvalid = false; // to ensure the right error shows for mix/max user error
 
         // Check if ID is an int (if we disable auto-generate for the IDs)
         try
@@ -122,6 +156,7 @@ public class ModifyProductController implements Initializable{
         } catch (NumberFormatException e) {
             errorDialogueBox("Min Error: Please enter a whole number");
             errorDetected = true;
+            mixOrMaxInvalid = true;
         }
 
         // check if max is an int
@@ -130,17 +165,17 @@ public class ModifyProductController implements Initializable{
         } catch (NumberFormatException e) {
             errorDialogueBox("Max Error: Please enter a whole number");
             errorDetected = true;
+            mixOrMaxInvalid = true;
         }
 
-        if (min > max) {
-            errorDialogueBox("Min cannot be lager than Max");
+        if (min > max && !mixOrMaxInvalid) {
+            errorDialogueBox("Min cannot be larger than Max");
             errorDetected = true;
         }
 
 
         // check if any dialogue box was produced. If so, exit the function
         if (errorDetected) {
-            System.out.println("Error Detected");
             return 1;
         }
 
@@ -154,6 +189,15 @@ public class ModifyProductController implements Initializable{
             // add it to the Inventory observable list, so it saved and displayed in GUI.
 
             Inventory.updateProduct(id, new Product(id, name, price, inventory, min, max));
+
+            // removes previous associated parts
+            System.out.println("For product " +currentProduct.getName() + ", parts before removing: " + currentProduct.getAllAssociatedParts());
+            currentProduct.removeAllAssociatedParts();
+
+
+            // replaces them with the ones in the buffer
+            currentProduct.setAllAssociatedParts(partsBuffer);
+            System.out.println("For product " +currentProduct.getName() + ", parts after trying to add are: " + currentProduct.getAllAssociatedParts());
 
             changeScene(event, "View/MainScreenGUI.fxml");
         }
@@ -193,13 +237,9 @@ public class ModifyProductController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // sets them in a buffer for the user to work with
-        //partsBuffer = currentProduct.getAllAssociatedParts();
-        System.out.println("The current product is " + currentProduct.getName());
-        System.out.println("The parts are " + currentProduct.getAllAssociatedParts());
-
         // display the associated parts
         aPartsTableView.setItems(currentProduct.getAllAssociatedParts());
+        System.out.println("For product " +currentProduct.getName() + ", the current associated parts are: " + currentProduct.getAllAssociatedParts());
 
         aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -213,8 +253,6 @@ public class ModifyProductController implements Initializable{
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-
-
     }
 }
 

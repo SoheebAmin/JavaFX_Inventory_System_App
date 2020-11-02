@@ -88,7 +88,6 @@ public class AddProductController implements Initializable{
         }
         // removes selected parts to the buffer
         partsBuffer.remove(selectedPart);
-        System.out.println(partsBuffer);
 
         // shows the updated associated parts buffer
         aPartsTableView.setItems(partsBuffer);
@@ -111,6 +110,7 @@ public class AddProductController implements Initializable{
         int max = 0;
 
         boolean errorDetected = false;
+        boolean mixOrMaxInvalid = false;
 
         // Check if ID is an int (if we disable auto-generate for the IDs)
         try
@@ -150,6 +150,7 @@ public class AddProductController implements Initializable{
         } catch (NumberFormatException e) {
             errorDialogueBox("Min Error: Please enter a whole number");
             errorDetected = true;
+            mixOrMaxInvalid = true;
         }
 
         // check if max is an int
@@ -158,10 +159,11 @@ public class AddProductController implements Initializable{
         } catch (NumberFormatException e) {
             errorDialogueBox("Max Error: Please enter a whole number");
             errorDetected = true;
+            mixOrMaxInvalid = true;
         }
 
-        if (min > max) {
-            errorDialogueBox("Min cannot be lager than Max");
+        if (min > max && !mixOrMaxInvalid) {
+            errorDialogueBox("Min cannot be larger than Max");
             errorDetected = true;
         }
 

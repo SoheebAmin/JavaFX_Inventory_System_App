@@ -51,6 +51,7 @@ public class AddPartController implements Initializable{
         String companyName = "";
 
         boolean errorDetected = false;
+        boolean mixOrMaxInvalid = false;
 
         // Check if ID is an int (if we disable auto-generate for the IDs)
         try
@@ -90,6 +91,7 @@ public class AddPartController implements Initializable{
         } catch (NumberFormatException e) {
             errorDialogueBox("Min Error: Please enter a whole number");
             errorDetected = true;
+            mixOrMaxInvalid = true;
         }
 
         // check if max is an int
@@ -97,6 +99,12 @@ public class AddPartController implements Initializable{
             max = Integer.parseInt(maxText.getText());
         } catch (NumberFormatException e) {
             errorDialogueBox("Max Error: Please enter a whole number");
+            errorDetected = true;
+            mixOrMaxInvalid = true;
+        }
+
+        if (min > max && !mixOrMaxInvalid) {
+            errorDialogueBox("Min cannot be lager than Max");
             errorDetected = true;
         }
 
@@ -120,14 +128,8 @@ public class AddPartController implements Initializable{
             }
         }
 
-        if (min > max) {
-            errorDialogueBox("Min cannot be lager than Max");
-            errorDetected = true;
-        }
-
         // check if any dialogue box was produced. If so, exit the function
         if (errorDetected) {
-            System.out.println("Error Detected");
             return 1;
         }
 
