@@ -169,8 +169,10 @@ public class MainScreenController implements Initializable{
         return 0;
     }
 
-
     public int modifyProductButtonClicked(ActionEvent event) throws IOException {
+        Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
+        ModifyProductController.getCurrentProduct(selectedProduct);
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("View/ModifyProductGUI.fxml"));
         loader.load();
@@ -179,8 +181,11 @@ public class MainScreenController implements Initializable{
         ModifyProductController MPrC = loader.getController();
         try
         {
-            MPrC.sendProduct(productsTableView.getSelectionModel().getSelectedItem());
-        } catch (Exception e) {
+            MPrC.getCurrentProduct(selectedProduct);
+            MPrC.sendProduct(selectedProduct);
+
+        }
+        catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText("You need to select a product!");

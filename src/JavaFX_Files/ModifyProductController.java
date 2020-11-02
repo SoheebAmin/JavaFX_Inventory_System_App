@@ -1,6 +1,8 @@
 package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +28,16 @@ public class ModifyProductController implements Initializable{
     @FXML private TableColumn<Part, Double> partPricePerUnitCol;
     @FXML private TableColumn<Part, Integer> partStockCol;
 
+    //a buffer that will hold parts being added or removed
+    private ObservableList<Part> partsBuffer = FXCollections.observableArrayList();
+
+    //Variables for the Associated Parts TableView
+    @FXML private TableView<Part> aPartsTableView;
+    @FXML private TableColumn<Part, Integer> aPartIdCol;
+    @FXML private TableColumn<Part, String> aPartNameCol;
+    @FXML private TableColumn<Part, Double> aPartPricePerUnitCol;
+    @FXML private TableColumn<Part, Integer> aPartStockCol;
+
     // Variables for Radio Buttons and GUI text fields
     @FXML private TextField idText;
     @FXML private TextField nameText;
@@ -33,6 +45,11 @@ public class ModifyProductController implements Initializable{
     @FXML private TextField priceText;
     @FXML private TextField minText;
     @FXML private TextField maxText;
+
+    private static Product currentProduct = null;
+    public static void getCurrentProduct(Product product) {
+        currentProduct = product;
+    }
 
     public int addButtonClicked() {
         // grabs selected part
@@ -158,7 +175,7 @@ public class ModifyProductController implements Initializable{
 
     // method to get data from the main screen.
     public void sendProduct(Product product) {
-        idText.setText(String.valueOf(product.getId()));
+        idText.setText((String.valueOf((product.getId()))));
         nameText.setText(product.getName());
         inventoryText.setText(String.valueOf(product.getStock()));
         priceText.setText(String.valueOf(product.getPrice()));
@@ -175,6 +192,18 @@ public class ModifyProductController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("The current item is" + currentProduct.getName());
+
+        System.out.println("The associated parts are" + currentProduct.getAllAssociatedParts());
+
+        // display the associated parts
+        aPartsTableView.setItems(currentProduct.getAllAssociatedParts());
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
         // grabs the parts tableviews
         partsTableView.setItems(Inventory.getAllParts());
 

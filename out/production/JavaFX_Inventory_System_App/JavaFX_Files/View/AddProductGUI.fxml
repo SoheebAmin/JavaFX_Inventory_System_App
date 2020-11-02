@@ -33,10 +33,10 @@
             <TextField fx:id="priceText" />
          </children>
       </VBox>
-      <Label layoutX="145.0" layoutY="227.0" text="Min" />
+      <Label layoutX="145.0" layoutY="227.0" text="Max" />
       <TextField fx:id="minText" layoutX="75.0" layoutY="222.0" prefHeight="26.0" prefWidth="54.0" />
       <Button layoutX="525.0" layoutY="456.0" mnemonicParsing="false" onAction="#saveButtonClicked" text="Save" />
-      <Label layoutX="48.0" layoutY="227.0" text="Max" />
+      <Label layoutX="48.0" layoutY="227.0" text="Min" />
       <TextField fx:id="maxText" layoutX="169.0" layoutY="222.0" prefHeight="26.0" prefWidth="54.0" />
       <TextField layoutX="423.0" layoutY="24.0" prefHeight="26.0" prefWidth="160.0" promptText="Search by Part ID or Name" />
       <TableView fx:id="partsTableView" layoutX="319.0" layoutY="69.0" prefHeight="138.0" prefWidth="390.0">
@@ -49,12 +49,12 @@
       </TableView>
       <Button layoutX="665.0" layoutY="215.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
       <Button layoutX="566.0" layoutY="404.0" mnemonicParsing="false" text="Remove Associated Part" />
-      <TableView fx:id="partsTableView1" layoutX="319.0" layoutY="266.0" prefHeight="138.0" prefWidth="390.0">
+      <TableView fx:id="aPartsTableView" layoutX="319.0" layoutY="266.0" prefHeight="138.0" prefWidth="390.0">
          <columns>
-            <TableColumn fx:id="partIdCol1" prefWidth="50.0" text="Part ID" />
-            <TableColumn fx:id="partNameCol1" prefWidth="209.0" text="Part Name" />
-            <TableColumn fx:id="partStockCol1" prefWidth="47.0" text="Stock" />
-            <TableColumn fx:id="partPricePerUnitCol1" prefWidth="83.0" text="Price/Cost" />
+            <TableColumn fx:id="aPartIdCol" prefWidth="50.0" text="Part ID" />
+            <TableColumn fx:id="aPartNameCol" prefWidth="209.0" text="Part Name" />
+            <TableColumn fx:id="aPartStockCol" prefWidth="47.0" text="Stock" />
+            <TableColumn fx:id="aPartPricePerUnitCol" prefWidth="83.0" text="Price/Cost" />
          </columns>
       </TableView>
    </children>

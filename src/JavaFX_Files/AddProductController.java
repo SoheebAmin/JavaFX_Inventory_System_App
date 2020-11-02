@@ -1,6 +1,8 @@
 package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +28,16 @@ public class AddProductController implements Initializable{
     @FXML private TableColumn<Part, Double> partPricePerUnitCol;
     @FXML private TableColumn<Part, Integer> partStockCol;
 
+    //a buffer that will hold any selected parts for products being created
+    private ObservableList<Part> partsBuffer = FXCollections.observableArrayList();
+
+    //Variables for the Associated Parts TableView
+    @FXML private TableView<Part> aPartsTableView;
+    @FXML private TableColumn<Part, Integer> aPartIdCol;
+    @FXML private TableColumn<Part, String> aPartNameCol;
+    @FXML private TableColumn<Part, Double> aPartPricePerUnitCol;
+    @FXML private TableColumn<Part, Integer> aPartStockCol;
+
     // Variables for all GUI text fields
     @FXML private TextField idText;
     @FXML private TextField nameText;
@@ -33,6 +45,7 @@ public class AddProductController implements Initializable{
     @FXML private TextField priceText;
     @FXML private TextField minText;
     @FXML private TextField maxText;
+
 
     public int addButtonClicked() {
         // grabs selected part
@@ -49,7 +62,16 @@ public class AddProductController implements Initializable{
         }
         else
         {
-            System.out.println(selectedPart);
+            partsBuffer.add(selectedPart);
+
+            // shows the associated parts buffer
+            aPartsTableView.setItems(partsBuffer);
+
+            aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+            aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+            aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
         }
         return 0;
     }
@@ -131,7 +153,18 @@ public class AddProductController implements Initializable{
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
             // add it to the Inventory observable list, so it saved and displayed in GUI.
-            Inventory.addProduct(new Product(id, name, price, inventory, min, max));
+            Product newProduct = new Product(id, name, price, inventory, min, max);
+
+            Inventory.addProduct(newProduct);
+
+            // check parts buffer for parts. If there, add them to the product
+            if(!partsBuffer.isEmpty())
+            {
+                for(Part bufferedPart : partsBuffer)
+                {
+                    newProduct.addAssociatedPart(bufferedPart);
+                }
+            }
 
             changeScene(event, "View/MainScreenGUI.fxml");
         }
@@ -167,7 +200,6 @@ public class AddProductController implements Initializable{
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-
     }
 }
 

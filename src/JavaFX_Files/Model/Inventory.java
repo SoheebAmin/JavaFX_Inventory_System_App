@@ -72,6 +72,22 @@ public class Inventory {
         return false;
     }
 
+    // Get the product by its Id
+    public static Product getProduct(int id) {
+
+        int indexCounter = 0; // counter to keep track of index
+
+        for(Product product : Inventory.getAllProducts())
+        {
+            if(product.getId() == id)
+            {
+                return product;
+            }
+            indexCounter++;
+        }
+        return null;
+    }
+
     // Delete part
     public static void deletePart(Part partToDelete) {
         Inventory.getAllParts().remove(partToDelete);
