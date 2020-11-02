@@ -120,7 +120,7 @@ public class ModifyPartController implements Initializable{
         else
         {
             // If outsourced is selected, check if anything was entered
-            companyName = nameText.getText();
+            companyName = machineIdOrCompanyLabelText.getText();
             if (name.equals(""))
             {
                 errorDialogueBox("Name Error: Please enter a company name");
@@ -193,8 +193,9 @@ public class ModifyPartController implements Initializable{
         {
             outsourcedButton.setSelected(true);
             machineIdOrCompanyLabelText.setText(((Outsourced) part).getCompanyName());
-            finalLabel.setText("Company Label");
+            finalLabel.setText("Company Name");
         }
+
     }
 
     private void errorDialogueBox(String errorMessage) {
