@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/** The Controller to Modify Products. */
+/** This method is the class to create the Modify Product Controller object. */
 public class ModifyProductController implements Initializable{
 
     //Variables for the Parts TableView
@@ -59,7 +59,7 @@ public class ModifyProductController implements Initializable{
         currentProduct = product;
     }
 
-    /** This method allows us to search by ID or product name in the search bar */
+    /** This method allows us to search by ID or part name in the search bar */
     public void partSearchKeystroke() {
         ObservableList<Part> searchPartsBuffer = FXCollections.observableArrayList();
         String currentlyTyped = partSearch.getText();
@@ -279,6 +279,7 @@ public class ModifyProductController implements Initializable{
         alert.showAndWait();
     }
 
+    /** Method to set initial conditions of the controller. */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/** The Main Class that allows the fist scene to load via JavaFX. */
 public class Main extends Application {
 
     @Override
@@ -19,8 +20,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
-
+    /** The main method to set the pre-populate some parts and products and then set the program into motion. */
     public static void main(String[] args) {
         // creating the pre-placed objects from the parts tableview.
         Inventory.addPart(new InHouse(1, "Generic Motor", 899.99, 2, 1, 3, 8689));

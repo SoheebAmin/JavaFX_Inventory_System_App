@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This method is the class to create the Modify Part Controller object. */
 public class ModifyPartController implements Initializable{
 
     // Variables for Radio Buttons and GUI text fields
@@ -32,10 +33,12 @@ public class ModifyPartController implements Initializable{
     @FXML private TextField machineIdOrCompanyLabelText;
     @FXML private Label finalLabel;
 
+    /** Toggle the final label to say "Company Name". */
     public void changeToOutsourced() {
         finalLabel.setText("Company Name");
     }
 
+    /** Toggle the final label to say "Machine ID". */
     public void changeToInHouse() {
         finalLabel.setText("Machine ID");
     }
@@ -213,6 +216,7 @@ public class ModifyPartController implements Initializable{
         alert.showAndWait();
     }
 
+    /** Method to set initial conditions of the controller. */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }

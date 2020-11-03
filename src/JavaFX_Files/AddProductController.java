@@ -49,7 +49,7 @@ public class AddProductController implements Initializable{
     // for the search bar
     @FXML private TextField partSearch;
 
-    /** This method allows us to search by ID or product name in the search bar */
+    /** This method allows us to search by ID or part name in the search bar */
     public void partSearchKeystroke() {
         ObservableList<Part> searchPartsBuffer = FXCollections.observableArrayList();
         String currentlyTyped = partSearch.getText();
@@ -249,6 +249,7 @@ public class AddProductController implements Initializable{
         alert.showAndWait();
     }
 
+    /** Method to set initial conditions of the controller. */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

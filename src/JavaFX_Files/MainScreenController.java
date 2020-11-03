@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This is the class for the main controller that loads at the start of the program. */
 public class MainScreenController implements Initializable{
 
     // Variables for the Parts Table tableview and columns.
@@ -39,7 +40,7 @@ public class MainScreenController implements Initializable{
     @FXML private TextField partSearch;
     @FXML private TextField productSearch;
 
-    /* Functions for Part Buttons */
+    /** This method allows us to search by ID or part name in the search bar */
     public void partSearchKeystroke() {
         ObservableList<Part> partsBuffer = FXCollections.observableArrayList();
         String currentlyTyped = partSearch.getText();
@@ -64,7 +65,7 @@ public class MainScreenController implements Initializable{
             partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
     }
 
-    // get a part by its Id
+    /** This method gets the part object using its id. */
     public static Part getPart(int id) {
         for(Part part : Inventory.getAllParts())
         {
@@ -74,7 +75,9 @@ public class MainScreenController implements Initializable{
         return null;
     }
 
-    // Filter part list
+    /** This method allows us to filter through the name of parts based on a user-provided string. *
+     @param criteria is updated for every key typed by the user
+     */
     public static ObservableList<Part> filterPart(String criteria) {
         // first, clear the filter if it needs to be
         if(!(Inventory.getFilteredParts().isEmpty()))
@@ -97,12 +100,13 @@ public class MainScreenController implements Initializable{
         return Inventory.getFilteredParts();
     }
 
-
+    /** This function loads the scene for the Add Part Controller*/
     public void addPartButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddPartGUI.fxml");
 
     }
 
+    /** This method grabs the data of the part selected, sends it to a new Controller object, which is then loaded in a new scene. */
     public int modifyPartButtonClicked(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
@@ -131,6 +135,7 @@ public class MainScreenController implements Initializable{
         return 0;
     }
 
+    /** This function loads the scene for the Add Part Controller. */
     public int deletePartButtonClicked() {
         // grabs selected part
         Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
@@ -157,6 +162,8 @@ public class MainScreenController implements Initializable{
     }
 
     /* Functions For Product Buttons */
+
+    /** This method allows us to search by ID or product name in the search bar */
     public void productSearchKeystroke() {
         ObservableList<Product> productBuffer = FXCollections.observableArrayList();
         String currentlyTyped = productSearch.getText();
@@ -181,7 +188,7 @@ public class MainScreenController implements Initializable{
         partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
     }
 
-    // get a product by its Id
+    /** This method allows us to get a product by using its generated Id. */
     public Product getProduct(int id) {
         for (Product product : Inventory.getAllProducts()) {
             if (product.getId() == id)
@@ -190,10 +197,12 @@ public class MainScreenController implements Initializable{
         return null;
     }
 
-
+    /** This method loads the Add Product Controller in a new scene. */
     public void addProductButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddProductGUI.fxml");
     }
+
+    /** Method to delete the selected product object from the Inventory class, while first checking if there are associated parts. */
     public  int deleteProductButtonClicked() {
         // grabs selected product
         Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
@@ -222,6 +231,7 @@ public class MainScreenController implements Initializable{
         return 0;
     }
 
+    /** This method grabs the data of the product selected, sends it to a new Controller object, which is then loaded in a new scene. */
     public int modifyProductButtonClicked(ActionEvent event) {
         try
         {
@@ -251,7 +261,9 @@ public class MainScreenController implements Initializable{
         return 0;
     }
 
-    // Filter product list
+    /** This method allows us to filter through the name of products based on a user-provided string. *
+     @param criteria is updated for every key typed by the user
+     */
     public ObservableList<Product> filterProduct(String criteria) {
         // first, clear the filter if it needs to be
         if(!(Inventory.getFilteredProducts().isEmpty()))
@@ -273,6 +285,7 @@ public class MainScreenController implements Initializable{
         return Inventory.getFilteredProducts();
     }
 
+    /** This method wraps together the common code to generate an error dialogue box */
     private void errorDialogueBox(String errorMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -280,6 +293,7 @@ public class MainScreenController implements Initializable{
         alert.showAndWait();
     }
 
+    /** This method wraps the common code to change scenes. */
     public void changeScene(ActionEvent event, String sceneName) throws IOException {
         Parent MainScreenParent = FXMLLoader.load(getClass().getResource((sceneName)));
         Scene MainScreenScene = new Scene(MainScreenParent);
@@ -288,17 +302,17 @@ public class MainScreenController implements Initializable{
         window.show();
     }
 
+    /** This method exits the program via the Exit button */
     public void setExitButton(){
         System.exit(0);
     }
 
-
+    /** Method to set initial conditions of the controller. */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // to populate the parts table
         partsTableView.setItems(Inventory.getAllParts());
-        //partsTableView.setItems(filterPart("Mot"));
 
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -308,49 +322,11 @@ public class MainScreenController implements Initializable{
 
         // to populate the product table
         productsTableView.setItems(Inventory.getAllProducts());
-        //productsTableView.setItems(filterProduct("X"));
-
-
 
         productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         productStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-
-
-
-
-        /*
-       Testing methods commented out
-
-        partsTableView.getSelectionModel().select(selectPart(2));
-        productsTableView.getSelectionModel().select(selectProduct(2));
-
-
-        if(updatePart(1, new inHouse(1, "Bloator", 120.05, 20, 1, 3, 8689)))
-            System.out.println("Update Done, Son");
-        else
-            System.out.println("Fail");
-
-
-        if(deletePart(1))
-            System.out.println("Deleted");
-        else
-            System.out.println("No Match");
-
-
-        if(updateProduct(1, new Product(1, "BoatorCar", 9990.05, 2, 1, 3)))
-            System.out.println("Update Done, Son");
-        else
-            System.out.println("Fail");
-
-
-        if(deleteProduct(1))
-            System.out.println("Deleted");
-        else
-            System.out.println("No Match");
-
-         */
 
     }
 }

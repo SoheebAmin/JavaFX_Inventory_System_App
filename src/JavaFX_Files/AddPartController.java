@@ -180,6 +180,7 @@ public class AddPartController implements Initializable{
         alert.showAndWait();
     }
 
+    /** Method to set initial conditions of the controller. */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // just to set a default
