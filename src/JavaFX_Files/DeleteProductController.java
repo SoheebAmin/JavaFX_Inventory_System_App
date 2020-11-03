@@ -13,10 +13,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DeleteProductController implements Initializable{
-
-    // Variables for all GUI text fields
-
-
     // The method to cancel and return to the previous scene
     public void cancelButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/MainScreenGUI.fxml");

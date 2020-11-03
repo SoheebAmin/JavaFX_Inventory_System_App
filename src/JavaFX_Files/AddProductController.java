@@ -39,7 +39,6 @@ public class AddProductController implements Initializable{
     @FXML private TableColumn<Part, Integer> aPartStockCol;
 
     // Variables for all GUI text fields
-    @FXML private TextField idText;
     @FXML private TextField nameText;
     @FXML private TextField inventoryText;
     @FXML private TextField priceText;

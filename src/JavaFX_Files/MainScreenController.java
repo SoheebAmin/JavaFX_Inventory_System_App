@@ -204,7 +204,7 @@ public class MainScreenController implements Initializable{
             errorDialogueBox("You need to select a product!");
             return 1;
         }
-        if(selectedProduct.getAllAssociatedParts().isEmpty() == false)
+        if(!selectedProduct.getAllAssociatedParts().isEmpty())
         {
             errorDialogueBox("There are associated parts that must be removed first!");
             return 1;
@@ -222,7 +222,7 @@ public class MainScreenController implements Initializable{
         return 0;
     }
 
-    public int modifyProductButtonClicked(ActionEvent event) throws IOException {
+    public int modifyProductButtonClicked(ActionEvent event) {
         try
         {
             Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
@@ -234,7 +234,7 @@ public class MainScreenController implements Initializable{
 
             // Send the data selected from the table view to the Modify Part Menu.
             ModifyProductController MPrC = loader.getController();
-            MPrC.getCurrentProduct(selectedProduct);
+            ModifyProductController.getCurrentProduct(selectedProduct);
             MPrC.sendProduct(selectedProduct);
 
             // Creates new scene.

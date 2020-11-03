@@ -22,8 +22,6 @@ public class AddPartController implements Initializable{
 
     // Variables for Radio Buttons and GUI text fields
     @FXML private RadioButton inHouseButton;
-    @FXML private RadioButton outsourcedButton;
-    @FXML private TextField idText;
     @FXML private TextField nameText;
     @FXML private TextField inventoryText;
     @FXML private TextField priceText;
@@ -101,7 +99,7 @@ public class AddPartController implements Initializable{
         }
 
         // If in-house is selected, check if machine ID is an int
-        if(inHouseButton.isSelected() == true) {
+        if(inHouseButton.isSelected()) {
             try {
                 machineId = Integer.parseInt(machineIdText.getText());
             } catch (NumberFormatException e) {
@@ -133,7 +131,7 @@ public class AddPartController implements Initializable{
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
            // check to see if this is for an in-house or eternal part
-            if(inHouseButton.isSelected() == true)
+            if(inHouseButton.isSelected())
             {
                 // add it to the Inventory observable list, so it saved and displayed in GUI.
                 int idToSet = Inventory.getPartIdCount() + 1;

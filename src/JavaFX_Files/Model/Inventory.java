@@ -95,16 +95,12 @@ public class Inventory {
 
     // Get the product by its Id
     public static Product getProduct(int id) {
-
-        int indexCounter = 0; // counter to keep track of index
-
         for(Product product : Inventory.getAllProducts())
         {
             if(product.getId() == id)
             {
                 return product;
             }
-            indexCounter++;
         }
         return null;
     }
@@ -118,7 +114,6 @@ public class Inventory {
     public static void deleteProduct(Product productToDelete) {
         Inventory.getAllProducts().remove(productToDelete);
     }
-
 
 
 }

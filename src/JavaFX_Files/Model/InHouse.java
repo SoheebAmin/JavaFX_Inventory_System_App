@@ -2,6 +2,7 @@ package JavaFX_Files.Model;
 
 import JavaFX_Files.Part;
 
+/**InHouse Class, which is a sub-class of the Parts Class.*/
 public class InHouse extends Part {
 
     private int machineId;

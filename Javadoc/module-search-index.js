@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"JavaFX.Inventory.System.App"}]
