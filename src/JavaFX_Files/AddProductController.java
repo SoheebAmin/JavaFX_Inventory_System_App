@@ -137,7 +137,6 @@ public class AddProductController implements Initializable{
 
     public int saveButtonClicked(ActionEvent event) throws IOException {
         // initial values given since required if variables set in try blocks.
-        int id = 0;
         int inventory = 0;
         double price = 0;
         int min = 0;
@@ -146,14 +145,7 @@ public class AddProductController implements Initializable{
         boolean errorDetected = false;
         boolean mixOrMaxInvalid = false;
 
-        // Check if ID is an int (if we disable auto-generate for the IDs)
-        try
-        {
-            id = Integer.parseInt(idText.getText());
-        } catch (NumberFormatException e) {
-            errorDialogueBox("ID Error: Please enter a whole number");
-            errorDetected = true;
-        }
+        // ID not included because it is auto generated
 
         // Check if String is not empty
         String name = nameText.getText();
@@ -213,8 +205,10 @@ public class AddProductController implements Initializable{
 
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
-            // add it to the Inventory observable list, so it saved and displayed in GUI.
-            Product newProduct = new Product(id, name, price, inventory, min, max);
+            // add it to the Inventory observable list, so it saved and displayed in GUI
+            int idToSet = Inventory.getProductIdCount() + 1; // Gets the next ID to set
+            Product newProduct = new Product(idToSet, name, price, inventory, min, max);
+            Inventory.setProductIdCount(idToSet); //sets the ID count as the new ID
 
             Inventory.addProduct(newProduct);
 

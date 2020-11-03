@@ -204,18 +204,18 @@ public class MainScreenController implements Initializable{
             errorDialogueBox("You need to select a product!");
             return 1;
         }
+        if(selectedProduct.getAllAssociatedParts().isEmpty() == false)
+        {
+            errorDialogueBox("There are associated parts that must be removed first!");
+            return 1;
+        }
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this product?");
 
         Optional<ButtonType> result = alert.showAndWait();
 
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
-            if(selectedProduct.getAllAssociatedParts().isEmpty() == false)
-            {
-                errorDialogueBox("There are associated parts that must be removed first!");
-                return 1;
-            }
-
             Inventory.deleteProduct(selectedProduct);
             productsTableView.setItems(Inventory.getAllProducts()); // to reset the list in case a search happened before it.
         }

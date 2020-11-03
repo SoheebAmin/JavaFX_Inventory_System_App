@@ -7,12 +7,33 @@ import javafx.collections.ObservableList;
 
 public class Inventory {
 
+    // Keeps track of the auto-generated Ids
+    private static int partIdCount = 0;
+    private static int productIdCount = 0;
+
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     // For searches
     private static ObservableList<Part> filteredParts = FXCollections.observableArrayList();
     private static ObservableList<Product> filteredProducts = FXCollections.observableArrayList();
+
+
+    public static int getPartIdCount() {
+        return partIdCount;
+    }
+
+    public static void setPartIdCount(int partIdCount) {
+        Inventory.partIdCount = partIdCount;
+    }
+
+    public static int getProductIdCount() {
+        return productIdCount;
+    }
+
+    public static void setProductIdCount(int productIdCount) {
+        Inventory.productIdCount = productIdCount;
+    }
 
     public static void addPart(Part part) {
         allParts.add(part);

@@ -25,7 +25,7 @@
       <RadioButton fx:id="outsoucedButton" layoutX="229.0" layoutY="28.0" mnemonicParsing="false" onAction="#changeToOutsourced" text="Outsourced" toggleGroup="$addPartGroup" />
       <VBox layoutX="71.0" layoutY="71.0" prefHeight="200.0" prefWidth="100.0" spacing="21.0">
          <children>
-            <Label text="ID" />
+            <Label text="Generated ID" />
             <Label text="Name" />
             <Label text="Inventory" />
             <Label text="Price/Cost" />
@@ -35,7 +35,7 @@
       </VBox>
       <VBox layoutX="163.0" layoutY="68.0" prefHeight="225.0" prefWidth="100.0" spacing="12.0">
          <children>
-            <TextField fx:id="idText" />
+            <TextField fx:id="idText" disable="true" editable="false" promptText="Auto Generated" />
             <TextField fx:id="nameText" />
             <TextField fx:id="inventoryText" />
             <TextField fx:id="priceText" />

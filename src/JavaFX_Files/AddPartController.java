@@ -42,7 +42,6 @@ public class AddPartController implements Initializable{
 
     public int saveButtonClicked(ActionEvent event) throws IOException {
         // initial values given since required if variables set in try blocks.
-        int id = 0;
         int inventory = 0;
         double price = 0;
         int min = 0;
@@ -53,14 +52,7 @@ public class AddPartController implements Initializable{
         boolean errorDetected = false;
         boolean mixOrMaxInvalid = false;
 
-        // Check if ID is an int (if we disable auto-generate for the IDs)
-        try
-        {
-            id = Integer.parseInt(idText.getText());
-        } catch (NumberFormatException e) {
-            errorDialogueBox("ID Error: Please enter a whole number");
-            errorDetected = true;
-        }
+        // ID not included since auto-generated.
 
         // Check if name is not empty
         String name = nameText.getText();
@@ -144,13 +136,16 @@ public class AddPartController implements Initializable{
             if(inHouseButton.isSelected() == true)
             {
                 // add it to the Inventory observable list, so it saved and displayed in GUI.
-                Inventory.addPart(new InHouse(id, name, price, inventory, min, max, machineId));
+                int idToSet = Inventory.getPartIdCount() + 1;
+                Inventory.addPart(new InHouse(idToSet, name, price, inventory, min, max, machineId));
+                Inventory.setPartIdCount(idToSet); //sets the ID count as the new ID
 
             }
             else
             {
-                Inventory.addPart(new Outsourced(id, name, price, inventory, min, max, companyName));
-
+                int idToSet = Inventory.getPartIdCount() + 1;
+                Inventory.addPart(new Outsourced(idToSet, name, price, inventory, min, max, companyName));
+                Inventory.setPartIdCount(idToSet); //sets the ID count as the new ID
             }
             changeScene(event, "View/MainScreenGUI.fxml");
         }
