@@ -1,7 +1,6 @@
 package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +27,7 @@ public class ModifyProductController implements Initializable{
     @FXML private TableColumn<Part, Double> partPricePerUnitCol;
     @FXML private TableColumn<Part, Integer> partStockCol;
 
-    //a buffer that will hold parts being added or removed
+    //a buffer that will hold parts being added or removed. Starts by grabbing current associated parts.
     private ObservableList<Part> partsBuffer = currentProduct.getAllAssociatedParts();
 
     //Variables for the Associated Parts TableView
@@ -91,18 +90,24 @@ public class ModifyProductController implements Initializable{
             alert.showAndWait();
             return 1;
         }
-        // removes selected parts to the buffer
-        partsBuffer.remove(selectedPart);
+        // Alert asking for confirmation if user wants to delete.
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete?");
 
-        // shows the updated associated parts buffer
-        aPartsTableView.setItems(partsBuffer);
+        Optional<ButtonType> result = alert.showAndWait();
 
-        aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {// removes selected parts to the buffer
+            partsBuffer.remove(selectedPart);
+
+            // shows the updated associated parts buffer
+            aPartsTableView.setItems(partsBuffer);
+
+            aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+            aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+            aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        }
         return 0;
-
     }
 
     public int saveButtonClicked(ActionEvent event) throws IOException {
@@ -186,18 +191,14 @@ public class ModifyProductController implements Initializable{
 
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
-            // add it to the Inventory observable list, so it saved and displayed in GUI.
+            // saves all the updated fields into a new product
+            Product recreatedProduct = new Product(id, name, price, inventory, min, max);
 
-            Inventory.updateProduct(id, new Product(id, name, price, inventory, min, max));
+            // the new product replaces the old one.
+            Inventory.updateProduct(id, recreatedProduct);
 
-            // removes previous associated parts
-            System.out.println("For product " +currentProduct.getName() + ", parts before removing: " + currentProduct.getAllAssociatedParts());
-            currentProduct.removeAllAssociatedParts();
-
-
-            // replaces them with the ones in the buffer
-            currentProduct.setAllAssociatedParts(partsBuffer);
-            System.out.println("For product " +currentProduct.getName() + ", parts after trying to add are: " + currentProduct.getAllAssociatedParts());
+            // the associated parts set into the buffer (or the ones there by default) are saved
+            recreatedProduct.setAllAssociatedParts(partsBuffer);
 
             changeScene(event, "View/MainScreenGUI.fxml");
         }
@@ -239,7 +240,6 @@ public class ModifyProductController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // display the associated parts
         aPartsTableView.setItems(currentProduct.getAllAssociatedParts());
-        System.out.println("For product " +currentProduct.getName() + ", the current associated parts are: " + currentProduct.getAllAssociatedParts());
 
         aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));

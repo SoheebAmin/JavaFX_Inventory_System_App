@@ -86,18 +86,24 @@ public class AddProductController implements Initializable{
             alert.showAndWait();
             return 1;
         }
-        // removes selected parts to the buffer
-        partsBuffer.remove(selectedPart);
+        // Alert asking for confirmation if user wants to delete.
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete?");
 
-        // shows the updated associated parts buffer
-        aPartsTableView.setItems(partsBuffer);
+        Optional<ButtonType> result = alert.showAndWait();
 
-        aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {// removes selected parts to the buffer
+            partsBuffer.remove(selectedPart);
+
+            // shows the updated associated parts buffer
+            aPartsTableView.setItems(partsBuffer);
+
+            aPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            aPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+            aPartPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+            aPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        }
         return 0;
-
     }
 
 
