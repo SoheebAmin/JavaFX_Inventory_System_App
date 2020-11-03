@@ -1,6 +1,7 @@
 package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +35,68 @@ public class MainScreenController implements Initializable{
     @FXML private TableColumn<Product, Double> productPricePerUnitCol;
     @FXML private TableColumn<Product, Integer> productStockCol;
 
+    //Search bar variables
+    @FXML private TextField partSearch;
+    @FXML private TextField productSearch;
+
     /* Functions for Part Buttons */
+    public void partSearchKeystroke() {
+        ObservableList<Part> partsBuffer = FXCollections.observableArrayList();
+        String currentlyTyped = partSearch.getText();
+        if(currentlyTyped.matches("^\\d+$")) //use regex to confirm if input is an int
+        {
+            int id = Integer.parseInt(currentlyTyped);
+            Part partToAdd = getPart(id);
+            if(partToAdd != null)
+                partsBuffer.add(partToAdd);
+            else
+                partsBuffer = Inventory.getAllParts();
+        }
+        else
+        {
+            partsBuffer = filterPart(currentlyTyped);
+        }
+            partsTableView.setItems(partsBuffer);
+
+            partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+            partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+            partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+    }
+
+    // get a part by its Id
+    public Part getPart(int id) {
+        for(Part part : Inventory.getAllParts())
+        {
+            if(part.getId() == id)
+                return part;
+        }
+        return null;
+    }
+
+    // Filter part list
+    public ObservableList<Part> filterPart(String criteria) {
+        // first, clear the filter if it needs to be
+        if(!(Inventory.getFilteredParts().isEmpty()))
+        {
+            Inventory.getFilteredParts().clear();
+        }
+        // if not, create it based on the criteria.
+        for(Part part : Inventory.getAllParts())
+        {
+            if(part.getName().contains(criteria))
+            {
+                Inventory.getFilteredParts().add(part);
+            }
+        }
+        // checks to see if any results were found. If not, return original list.
+        if((Inventory.getFilteredParts().isEmpty()))
+        {
+            return Inventory.getAllParts();
+        }
+        return Inventory.getFilteredParts();
+    }
+
 
     public void addPartButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddPartGUI.fxml");
@@ -93,53 +155,41 @@ public class MainScreenController implements Initializable{
         return 0;
     }
 
-    // Search for part
-    public boolean searchPart(int id) {
-        for(Part part : Inventory.getAllParts())
+    /* Functions For Product Buttons */
+    public void productSearchKeystroke() {
+        ObservableList<Product> productBuffer = FXCollections.observableArrayList();
+        String currentlyTyped = productSearch.getText();
+        if(currentlyTyped.matches("^\\d+$")) //use regex to confirm if input is an int
         {
-            if(part.getId() == id)
-                return true;
+            int id = Integer.parseInt(currentlyTyped);
+            Product productToAdd = getProduct(id);
+            if(productToAdd != null)
+                productBuffer.add(productToAdd);
+            else
+                productBuffer = Inventory.getAllProducts();
         }
-        return false;
+        else
+        {
+            productBuffer = filterProduct(currentlyTyped);
+        }
+        productsTableView.setItems(productBuffer);
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
     }
 
-
-    // Select a part
-    public Part selectPart(int id) {
-        for(Part part : Inventory.getAllParts())
-        {
-            if(part.getId() == id)
-                return part;
+    // get a product by its Id
+    public Product getProduct(int id) {
+        for (Product product : Inventory.getAllProducts()) {
+            if (product.getId() == id)
+                return product;
         }
         return null;
     }
 
-    // Filter part list
-    public ObservableList<Part> filterPart(String criteria) {
-        // first, clear the filter if it needs to be
-        if(!(Inventory.getFilteredParts().isEmpty()))
-        {
-            Inventory.getFilteredParts().clear();
-        }
-        // if not, create it based on the criteria.
-        for(Part part : Inventory.getAllParts())
-        {
-            if(part.getName().contains(criteria))
-            {
-                Inventory.getFilteredParts().add(part);
-            }
-        }
-        // checks to see if any results were found. If not, return original list.
-        if((Inventory.getFilteredParts().isEmpty()))
-        {
-            return Inventory.getAllParts();
-        }
-        return Inventory.getFilteredParts();
-    }
 
-
-
-    /* Functions For Product Buttons */
     public void addProductButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddProductGUI.fxml");
     }
@@ -199,27 +249,6 @@ public class MainScreenController implements Initializable{
             return 1;
         }
         return 0;
-    }
-
-
-    // Search for products
-    public boolean searchProduct(int id) {
-        for(Product product: Inventory.getAllProducts())
-        {
-            if(product.getId() == id)
-                return true;
-        }
-        return false;
-    }
-
-    // Select a product
-    public Product selectProduct(int id) {
-        for(Product product : Inventory.getAllProducts())
-        {
-            if(product.getId() == id)
-                return product;
-        }
-        return null;
     }
 
     // Filter product list
