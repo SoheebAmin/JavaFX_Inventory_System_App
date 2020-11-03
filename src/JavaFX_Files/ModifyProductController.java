@@ -1,6 +1,7 @@
 package JavaFX_Files;
 
 import JavaFX_Files.Model.Inventory;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,10 +46,38 @@ public class ModifyProductController implements Initializable{
     @FXML private TextField minText;
     @FXML private TextField maxText;
 
+    // For the search search box
+    @FXML private TextField partSearch;
+
     // get the object that is being worked on from the Main Screen Controller.
     private static Product currentProduct = null;
+
     public static void getCurrentProduct(Product product) {
         currentProduct = product;
+    }
+
+    public void partSearchKeystroke() {
+        ObservableList<Part> searchPartsBuffer = FXCollections.observableArrayList();
+        String currentlyTyped = partSearch.getText();
+        if(currentlyTyped.matches("^\\d+$")) //use regex to confirm if input is an int
+        {
+            int id = Integer.parseInt(currentlyTyped);
+            Part partToAdd = MainScreenController.getPart(id);
+            if(partToAdd != null)
+                searchPartsBuffer.add(partToAdd);
+            else
+                searchPartsBuffer = Inventory.getAllParts();
+        }
+        else
+        {
+            searchPartsBuffer = MainScreenController.filterPart(currentlyTyped);
+        }
+        partsTableView.setItems(searchPartsBuffer);
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
     }
 
     public int addButtonClicked() {

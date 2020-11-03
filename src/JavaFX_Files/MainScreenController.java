@@ -65,7 +65,7 @@ public class MainScreenController implements Initializable{
     }
 
     // get a part by its Id
-    public Part getPart(int id) {
+    public static Part getPart(int id) {
         for(Part part : Inventory.getAllParts())
         {
             if(part.getId() == id)
@@ -75,7 +75,7 @@ public class MainScreenController implements Initializable{
     }
 
     // Filter part list
-    public ObservableList<Part> filterPart(String criteria) {
+    public static ObservableList<Part> filterPart(String criteria) {
         // first, clear the filter if it needs to be
         if(!(Inventory.getFilteredParts().isEmpty()))
         {
@@ -151,6 +151,7 @@ public class MainScreenController implements Initializable{
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
             Inventory.deletePart(selectedPart);
+            partsTableView.setItems(Inventory.getAllParts()); // to reset the list in case a search happened before it.
         }
         return 0;
     }
@@ -200,10 +201,7 @@ public class MainScreenController implements Initializable{
         //abort function if null
         if(selectedProduct == null)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("You need to select a product!");
-            alert.showAndWait();
+            errorDialogueBox("You need to select a product!");
             return 1;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this product?");
@@ -212,9 +210,14 @@ public class MainScreenController implements Initializable{
 
         if(result.isPresent() && result.get() == ButtonType.OK)
         {
-            // add logic to check if there's an associated part
+            if(selectedProduct.getAllAssociatedParts().isEmpty() == false)
+            {
+                errorDialogueBox("There are associated parts that must be removed first!");
+                return 1;
+            }
 
             Inventory.deleteProduct(selectedProduct);
+            productsTableView.setItems(Inventory.getAllProducts()); // to reset the list in case a search happened before it.
         }
         return 0;
     }
@@ -242,10 +245,7 @@ public class MainScreenController implements Initializable{
         }
         catch (Exception e)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("You need to select a product!");
-            alert.showAndWait();
+            errorDialogueBox("You need to select a product!");
             return 1;
         }
         return 0;
@@ -273,10 +273,11 @@ public class MainScreenController implements Initializable{
         return Inventory.getFilteredProducts();
     }
 
-
-
-    public void setExitButton(){
-        System.exit(0);
+    private void errorDialogueBox(String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
     }
 
     public void changeScene(ActionEvent event, String sceneName) throws IOException {
@@ -286,6 +287,11 @@ public class MainScreenController implements Initializable{
         window.setScene(MainScreenScene);
         window.show();
     }
+
+    public void setExitButton(){
+        System.exit(0);
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

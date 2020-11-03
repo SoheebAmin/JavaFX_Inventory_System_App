@@ -38,7 +38,7 @@
       <Button layoutX="525.0" layoutY="456.0" mnemonicParsing="false" onAction="#saveButtonClicked" text="Save" />
       <Label layoutX="48.0" layoutY="227.0" text="Min" />
       <TextField fx:id="maxText" layoutX="169.0" layoutY="222.0" prefHeight="26.0" prefWidth="54.0" />
-      <TextField layoutX="423.0" layoutY="24.0" prefHeight="26.0" prefWidth="160.0" promptText="Search by Part ID or Name" />
+      <TextField fx:id="partSearch" layoutX="319.0" layoutY="23.0" onKeyTyped="#partSearchKeystroke" prefHeight="26.0" prefWidth="160.0" promptText="Search by Part ID or Name" />
       <TableView fx:id="partsTableView" layoutX="319.0" layoutY="69.0" prefHeight="138.0" prefWidth="390.0">
          <columns>
             <TableColumn fx:id="partIdCol" prefWidth="50.0" text="Part ID" />

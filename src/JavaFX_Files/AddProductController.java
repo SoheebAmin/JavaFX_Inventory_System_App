@@ -46,6 +46,34 @@ public class AddProductController implements Initializable{
     @FXML private TextField minText;
     @FXML private TextField maxText;
 
+    // for the search bar
+    @FXML private TextField partSearch;
+
+
+    public void partSearchKeystroke() {
+        ObservableList<Part> searchPartsBuffer = FXCollections.observableArrayList();
+        String currentlyTyped = partSearch.getText();
+        if(currentlyTyped.matches("^\\d+$")) //use regex to confirm if input is an int
+        {
+            int id = Integer.parseInt(currentlyTyped);
+            Part partToAdd = MainScreenController.getPart(id);
+            if(partToAdd != null)
+                searchPartsBuffer.add(partToAdd);
+            else
+                searchPartsBuffer = Inventory.getAllParts();
+        }
+        else
+        {
+            searchPartsBuffer = MainScreenController.filterPart(currentlyTyped);
+        }
+        partsTableView.setItems(searchPartsBuffer);
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPricePerUnitCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+    }
+
 
     public int addButtonClicked() {
         // grabs selected part
