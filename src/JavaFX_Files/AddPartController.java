@@ -18,6 +18,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+
+/** The Controller to add parts to the parts list stored in the Inventory class */
 public class AddPartController implements Initializable{
 
     // Variables for Radio Buttons and GUI text fields
@@ -30,14 +32,19 @@ public class AddPartController implements Initializable{
     @FXML private TextField machineIdText;
     @FXML private Label finalLabel;
 
+    /** This method is to flip the last label to reflect the radio button choice of outsourced */
     public void changeToOutsourced() {
         finalLabel.setText("Company Name");
     }
 
+    /** This method is to flip the last label to reflect the radio button choice of in-house */
     public void changeToInHouse() {
         finalLabel.setText("Machine ID");
     }
 
+    /** This method allows the user to create the new part and populate its fields.
+     It also performs the error checking to ensure all values are valid.
+     It generates the ID via the static fields for the ID in the Part class. */
     public int saveButtonClicked(ActionEvent event) throws IOException {
         // initial values given since required if variables set in try blocks.
         int inventory = 0;
@@ -151,11 +158,12 @@ public class AddPartController implements Initializable{
     }
 
 
-    // The method to cancel and return to the previous scene
+    /** This method returns to the MainScreenController without making any changes to the Inventory class. */
     public void cancelButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/MainScreenGUI.fxml");
     }
 
+    /** This method wraps the common code to change scenes into method */
     public void changeScene(ActionEvent event, String sceneName) throws IOException {
         Parent MainScreenParent = FXMLLoader.load(getClass().getResource((sceneName)));
         Scene MainScreenScene = new Scene(MainScreenParent);
@@ -164,6 +172,7 @@ public class AddPartController implements Initializable{
         window.show();
     }
 
+    /** This method wraps together the common code to generate an error dialogue box */
     private void errorDialogueBox(String errorMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

@@ -40,7 +40,9 @@ public class ModifyPartController implements Initializable{
         finalLabel.setText("Machine ID");
     }
 
-
+    /** This method allows the user to save the changes to any fields and the sub-class type for the part.
+     It also performs the error checking to ensure all values are valid.
+     It recreates the product based on user specification and replaces the original */
     public int saveButtonClicked(ActionEvent event) throws IOException {
 
         /* First, values are checked since they may have been edited to incorrect formats */
@@ -132,7 +134,6 @@ public class ModifyPartController implements Initializable{
             }
         }
 
-
         // check if any dialogue box was produced. If so, exit the function
         if (errorDetected) {
             return 1;
@@ -163,11 +164,13 @@ public class ModifyPartController implements Initializable{
     }
 
 
-    // The method to cancel and return to the previous scene
+    /** This method returns to the MainScreenController without making any changes to the Inventory class. */
     public void cancelButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/MainScreenGUI.fxml");
     }
 
+
+    /** This method wraps together the common code to change scenes. */
     public void changeScene(ActionEvent event, String sceneName) throws IOException {
         Parent MainScreenParent = FXMLLoader.load(getClass().getResource((sceneName)));
         Scene MainScreenScene = new Scene(MainScreenParent);
@@ -176,7 +179,7 @@ public class ModifyPartController implements Initializable{
         window.show();
     }
 
-    // method to get data from the main screen.
+    /** This method allows the Main Screen to send the data of the selected part to the created controller object. */
     public void sendPart(Part part) {
         idText.setText(String.valueOf(part.getId()));
         nameText.setText(part.getName());
@@ -185,6 +188,7 @@ public class ModifyPartController implements Initializable{
         minText.setText(String.valueOf(part.getMin()));
         maxText.setText(String.valueOf(part.getMax()));
 
+        // select the type of object to send, and the initial conditions of the new screen.
         if(part instanceof InHouse)
         {
             inHouseButton.setSelected(true);
@@ -201,6 +205,7 @@ public class ModifyPartController implements Initializable{
 
     }
 
+    /** This method wraps together the common code to generate an error dialogue box */
     private void errorDialogueBox(String errorMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

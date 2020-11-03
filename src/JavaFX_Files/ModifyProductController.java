@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** The Controller to Modify Products. */
 public class ModifyProductController implements Initializable{
 
     //Variables for the Parts TableView
@@ -52,10 +53,13 @@ public class ModifyProductController implements Initializable{
     // get the object that is being worked on from the Main Screen Controller.
     private static Product currentProduct = null;
 
+    /**  This method allows us to store which object we are working.
+     It is identified via the user selection in the MainScreenController */
     public static void getCurrentProduct(Product product) {
         currentProduct = product;
     }
 
+    /** This method allows us to search by ID or product name in the search bar */
     public void partSearchKeystroke() {
         ObservableList<Part> searchPartsBuffer = FXCollections.observableArrayList();
         String currentlyTyped = partSearch.getText();
@@ -80,6 +84,8 @@ public class ModifyProductController implements Initializable{
         partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
     }
 
+    /** This method allows us to add an associated part to our buffer observable list.
+     It also then updates the GUI to reflect the users selection. */
     public int addButtonClicked() {
         // grabs selected part
         Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
@@ -106,6 +112,8 @@ public class ModifyProductController implements Initializable{
         return 0;
     }
 
+    /** This method allows the user to remove an associated part from the buffer.
+     It also updates the GUI to display accordingly. */
     public int removeButtonClicked() {
         // grabs selected part
         Part selectedPart = aPartsTableView.getSelectionModel().getSelectedItem();
@@ -139,6 +147,9 @@ public class ModifyProductController implements Initializable{
         return 0;
     }
 
+    /** This method allows the user to save the changes to any fields and associated objects for the product.
+     It also performs the error checking to ensure all values are valid.
+     It recreates the product based on user specification and replaces the original */
     public int saveButtonClicked(ActionEvent event) throws IOException {
 
         /* First, values are checked since they may have been edited to incorrect formats */
@@ -235,11 +246,13 @@ public class ModifyProductController implements Initializable{
     }
 
 
-    // The method to cancel and return to the previous scene
+    /** This method returns to the MainScreenController without making any changes to the Inventory class. */
     public void cancelButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/MainScreenGUI.fxml");
     }
 
+
+    /** This method wraps the common code to change scenes */
     public void changeScene(ActionEvent event, String sceneName) throws IOException {
         Parent MainScreenParent = FXMLLoader.load(getClass().getResource((sceneName)));
         Scene MainScreenScene = new Scene(MainScreenParent);
@@ -248,7 +261,7 @@ public class ModifyProductController implements Initializable{
         window.show();
     }
 
-    // method to get data from the main screen.
+    /** This method allows the Main Screen to send the data of the selected product to the created controller object. */
     public void sendProduct(Product product) {
         idText.setText((String.valueOf((product.getId()))));
         nameText.setText(product.getName());
@@ -258,6 +271,7 @@ public class ModifyProductController implements Initializable{
         maxText.setText(String.valueOf(product.getMax()));
     }
 
+    /** This method wraps together the common code to generate an error dialogue box. */
     private void errorDialogueBox(String errorMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -267,6 +281,7 @@ public class ModifyProductController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         // display the associated parts
         aPartsTableView.setItems(currentProduct.getAllAssociatedParts());
 

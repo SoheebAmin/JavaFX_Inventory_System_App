@@ -5,6 +5,7 @@ import JavaFX_Files.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/** This is the Inventory class. It stores all the data about all the objects for the life of the program */
 public class Inventory {
 
     // Keeps track of the auto-generated Ids
@@ -59,7 +60,7 @@ public class Inventory {
         return filteredProducts;
     }
 
-    // Update part
+    /** This method allows us to update a part with the users input. */
     public static boolean updatePart(int id, Part updatedPart) {
 
         int indexCounter = 0; // counter to keep track of index
@@ -76,7 +77,7 @@ public class Inventory {
         return false;
     }
 
-    // Update product
+    /** This method allows us to update a product with the users input. */
     public static boolean updateProduct(int id, Product updatedProduct) {
 
         int indexCounter = 0; // counter to keep track of index
@@ -93,7 +94,7 @@ public class Inventory {
         return false;
     }
 
-    // Get the product by its Id
+    /** This method locations a product object using its generated ID. */
     public static Product getProduct(int id) {
         for(Product product : Inventory.getAllProducts())
         {
@@ -105,12 +106,12 @@ public class Inventory {
         return null;
     }
 
-    // Delete part
+    /** This method is to delete parts from the parts list */
     public static void deletePart(Part partToDelete) {
         Inventory.getAllParts().remove(partToDelete);
     }
 
-    // Delete product
+    /** This method is to delete products from the products list */
     public static void deleteProduct(Product productToDelete) {
         Inventory.getAllProducts().remove(productToDelete);
     }

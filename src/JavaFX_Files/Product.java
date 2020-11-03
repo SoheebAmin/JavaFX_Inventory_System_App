@@ -3,6 +3,7 @@ package JavaFX_Files;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/** This is the class to create Product objects. */
 public class Product {
 
     private  ObservableList<Part> allAssociatedParts = FXCollections.observableArrayList();

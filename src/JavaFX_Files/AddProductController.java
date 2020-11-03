@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** The Controller to add products to the parts list stored in the Inventory class */
 public class AddProductController implements Initializable{
 
     //Variables for the Parts TableView
@@ -48,7 +49,7 @@ public class AddProductController implements Initializable{
     // for the search bar
     @FXML private TextField partSearch;
 
-
+    /** This method allows us to search by ID or product name in the search bar */
     public void partSearchKeystroke() {
         ObservableList<Part> searchPartsBuffer = FXCollections.observableArrayList();
         String currentlyTyped = partSearch.getText();
@@ -73,7 +74,8 @@ public class AddProductController implements Initializable{
         partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
     }
 
-
+    /** This method allows us to add an associated part to our buffer observable list.
+     It also then updates the GUI to reflect the users selection. */
     public int addButtonClicked() {
         // grabs selected part
         Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
@@ -100,6 +102,8 @@ public class AddProductController implements Initializable{
         return 0;
     }
 
+    /** This method allows the user to remove an associated part from the buffer.
+     It also updates the GUI to display accordingly. */
     public int removeButtonClicked() {
         // grabs selected part
         Part selectedPart = aPartsTableView.getSelectionModel().getSelectedItem();
@@ -133,7 +137,9 @@ public class AddProductController implements Initializable{
         return 0;
     }
 
-
+    /** This method allows the user to create the new product with its fields and associated products.
+     It also performs the error checking to ensure all values are valid.
+     It generates the ID via the static fields for the ID in the Product class. */
     public int saveButtonClicked(ActionEvent event) throws IOException {
         // initial values given since required if variables set in try blocks.
         int inventory = 0;
@@ -221,10 +227,12 @@ public class AddProductController implements Initializable{
         return 0;
     }
 
+    /** This method returns to the MainScreenController without making any changes to the Inventory class. */
     public void cancelButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/MainScreenGUI.fxml");
     }
 
+    /** This method wraps the common code to change scenes into method */
     public void changeScene(ActionEvent event, String sceneName) throws IOException {
         Parent MainScreenParent = FXMLLoader.load(getClass().getResource((sceneName)));
         Scene MainScreenScene = new Scene(MainScreenParent);
@@ -233,6 +241,7 @@ public class AddProductController implements Initializable{
         window.show();
     }
 
+    /** This method wraps together the common code to generate an error dialogue box */
     private void errorDialogueBox(String errorMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

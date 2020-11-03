@@ -1,5 +1,6 @@
 package JavaFX_Files;
 
+/** This is the class to create Part objects. */
 public abstract class Part {
 
     private int id;
@@ -65,7 +66,4 @@ public abstract class Part {
     public int getMax() {
         return max;
     }
-
-
-
 }
