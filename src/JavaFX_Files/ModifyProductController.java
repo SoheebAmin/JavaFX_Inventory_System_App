@@ -218,6 +218,12 @@ public class ModifyProductController implements Initializable{
             errorDetected = true;
         }
 
+        // check if inventory is less than the min or more than the max
+        if ((min > inventory) || (inventory > max))
+        {
+            errorDialogueBox("Please ensure the inventory is between the mix and max values!");
+            errorDetected = true;
+        }
 
         // check if any dialogue box was produced. If so, exit the function
         if (errorDetected) {

@@ -23,9 +23,9 @@ public class Main extends Application {
     /** The main method to set the pre-populate some parts and products and then set the program into motion. */
     public static void main(String[] args) {
         // creating the pre-placed objects from the parts tableview.
-        Inventory.addPart(new InHouse(1, "Generic Motor", 899.99, 2, 1, 3, 8689));
-        Inventory.addPart(new InHouse(2, "Generic Piston", 50.25, 5, 1, 3, 6101));
-        Inventory.addPart(new Outsourced(3, "Snow Tires Set", 99.99, 6, 1, 4, "IceWheels Inc"));
+        Inventory.addPart(new InHouse(1, "Generic Motor", 899.99, 2, 1, 8, 8689));
+        Inventory.addPart(new InHouse(2, "Generic Piston", 50.25, 5, 1, 20, 6101));
+        Inventory.addPart(new Outsourced(3, "Snow Tires Set", 99.99, 6, 1, 40, "IceWheels Inc"));
         Inventory.setPartIdCount(3); // sets a base ID to assume, for adding new parts.
 
         // creating the pre-placed objects from the products tableview.

@@ -105,6 +105,13 @@ public class AddPartController implements Initializable{
             errorDetected = true;
         }
 
+        // check if inventory is less than the min or more than the max
+        if ((min > inventory) || (inventory > max))
+        {
+            errorDialogueBox("Please ensure the inventory is between the mix and max values!");
+            errorDetected = true;
+        }
+
         // If in-house is selected, check if machine ID is an int
         if(inHouseButton.isSelected()) {
             try {
