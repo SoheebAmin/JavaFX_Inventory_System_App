@@ -1,6 +1,8 @@
-package JavaFX_Files;
+package JavaFX_Files.Controller;
 
 import JavaFX_Files.Model.Inventory;
+import JavaFX_Files.Part;
+import JavaFX_Files.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +21,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/** This method is the class to create the Modify Product Controller object. */
+/** This method is the class to create the Modify Product JavaFX_Files.Controller object. */
 public class ModifyProductController implements Initializable{
 
     //Variables for the Parts TableView
@@ -50,7 +52,7 @@ public class ModifyProductController implements Initializable{
     // For the search search box
     @FXML private TextField partSearch;
 
-    // get the object that is being worked on from the Main Screen Controller.
+    // get the object that is being worked on from the Main Screen JavaFX_Files.Controller.
     private static Product currentProduct = null;
 
     /**  This method allows us to store which object we are working.

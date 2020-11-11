@@ -1,6 +1,8 @@
-package JavaFX_Files;
+package JavaFX_Files.Controller;
 
 import JavaFX_Files.Model.Inventory;
+import JavaFX_Files.Part;
+import JavaFX_Files.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +21,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/** The Controller to add products to the parts list stored in the Inventory class */
+/** The JavaFX_Files.Controller to add products to the parts list stored in the Inventory class */
 public class AddProductController implements Initializable{
 
     //Variables for the Parts TableView

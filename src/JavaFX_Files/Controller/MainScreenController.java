@@ -1,6 +1,9 @@
-package JavaFX_Files;
+package JavaFX_Files.Controller;
 
 import JavaFX_Files.Model.Inventory;
+import JavaFX_Files.ModifyPartController;
+import JavaFX_Files.Part;
+import JavaFX_Files.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -100,13 +103,13 @@ public class MainScreenController implements Initializable{
         return Inventory.getFilteredParts();
     }
 
-    /** This function loads the scene for the Add Part Controller*/
+    /** This function loads the scene for the Add Part JavaFX_Files.Controller*/
     public void addPartButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddPartGUI.fxml");
 
     }
 
-    /** This method grabs the data of the part selected, sends it to a new Controller object, which is then loaded in a new scene. */
+    /** This method grabs the data of the part selected, sends it to a new JavaFX_Files.Controller object, which is then loaded in a new scene. */
     public int modifyPartButtonClicked(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
@@ -135,7 +138,7 @@ public class MainScreenController implements Initializable{
         return 0;
     }
 
-    /** This function loads the scene for the Add Part Controller. */
+    /** This function loads the scene for the Add Part JavaFX_Files.Controller. */
     public int deletePartButtonClicked() {
         // grabs selected part
         Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
@@ -197,7 +200,7 @@ public class MainScreenController implements Initializable{
         return null;
     }
 
-    /** This method loads the Add Product Controller in a new scene. */
+    /** This method loads the Add Product JavaFX_Files.Controller in a new scene. */
     public void addProductButtonClicked(ActionEvent event) throws IOException {
         changeScene(event, "View/AddProductGUI.fxml");
     }
@@ -231,7 +234,7 @@ public class MainScreenController implements Initializable{
         return 0;
     }
 
-    /** This method grabs the data of the product selected, sends it to a new Controller object, which is then loaded in a new scene. */
+    /** This method grabs the data of the product selected, sends it to a new JavaFX_Files.Controller object, which is then loaded in a new scene. */
     public int modifyProductButtonClicked(ActionEvent event) {
         try
         {

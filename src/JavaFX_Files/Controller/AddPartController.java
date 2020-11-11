@@ -1,4 +1,4 @@
-package JavaFX_Files;
+package JavaFX_Files.Controller;
 
 import JavaFX_Files.Model.Inventory;
 import JavaFX_Files.Model.InHouse;
@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 
-/** The Controller to add parts to the parts list stored in the Inventory class */
+/** The JavaFX_Files.Controller to add parts to the parts list stored in the Inventory class */
 public class AddPartController implements Initializable{
 
     // Variables for Radio Buttons and GUI text fields

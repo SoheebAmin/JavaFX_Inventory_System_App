@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/** This method is the class to create the Modify Part Controller object. */
+/** This method is the class to create the Modify Part JavaFX_Files.Controller object. */
 public class ModifyPartController implements Initializable{
 
     // Variables for Radio Buttons and GUI text fields
