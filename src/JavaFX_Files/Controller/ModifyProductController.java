@@ -248,7 +248,7 @@ public class ModifyProductController implements Initializable{
             // the associated parts set into the buffer (or the ones there by default) are saved
             recreatedProduct.setAllAssociatedParts(partsBuffer);
 
-            changeScene(event, "View/MainScreenGUI.fxml");
+            changeScene(event, "../View/MainScreenGUI.fxml");
         }
         return 0;
     }
@@ -256,7 +256,7 @@ public class ModifyProductController implements Initializable{
 
     /** This method returns to the MainScreenController without making any changes to the Inventory class. */
     public void cancelButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/MainScreenGUI.fxml");
+        changeScene(event, "../View/MainScreenGUI.fxml");
     }
 
 

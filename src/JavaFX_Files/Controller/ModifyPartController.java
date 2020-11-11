@@ -1,8 +1,9 @@
-package JavaFX_Files;
+package JavaFX_Files.Controller;
 
 import JavaFX_Files.Model.Inventory;
 import JavaFX_Files.Model.InHouse;
 import JavaFX_Files.Model.Outsourced;
+import JavaFX_Files.Part;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -168,7 +169,7 @@ public class ModifyPartController implements Initializable{
                 Inventory.updatePart(id, new Outsourced(id, name, price, inventory, min, max, companyName));
 
             }
-            changeScene(event, "View/MainScreenGUI.fxml");
+            changeScene(event, "../View/MainScreenGUI.fxml");
         }
         return 0;
     }
@@ -176,7 +177,7 @@ public class ModifyPartController implements Initializable{
 
     /** This method returns to the MainScreenController without making any changes to the Inventory class. */
     public void cancelButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/MainScreenGUI.fxml");
+        changeScene(event, "../View/MainScreenGUI.fxml");
     }
 
 

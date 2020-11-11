@@ -231,14 +231,14 @@ public class AddProductController implements Initializable{
             {
                 newProduct.setAllAssociatedParts(partsBuffer);
             }
-            changeScene(event, "View/MainScreenGUI.fxml");
+            changeScene(event, "../View/MainScreenGUI.fxml");
         }
         return 0;
     }
 
     /** This method returns to the MainScreenController without making any changes to the Inventory class. */
     public void cancelButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/MainScreenGUI.fxml");
+        changeScene(event, "../View/MainScreenGUI.fxml");
     }
 
     /** This method wraps the common code to change scenes into method */

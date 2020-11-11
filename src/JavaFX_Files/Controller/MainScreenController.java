@@ -1,7 +1,6 @@
 package JavaFX_Files.Controller;
 
 import JavaFX_Files.Model.Inventory;
-import JavaFX_Files.ModifyPartController;
 import JavaFX_Files.Part;
 import JavaFX_Files.Product;
 import javafx.collections.FXCollections;
@@ -105,7 +104,7 @@ public class MainScreenController implements Initializable{
 
     /** This function loads the scene for the Add Part JavaFX_Files.Controller*/
     public void addPartButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/AddPartGUI.fxml");
+        changeScene(event, "../View/AddPartGUI.fxml");
 
     }
 
@@ -113,7 +112,7 @@ public class MainScreenController implements Initializable{
     public int modifyPartButtonClicked(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("View/ModifyPartGUI.fxml"));
+        loader.setLocation(getClass().getResource("../View/ModifyPartGUI.fxml"));
         loader.load();
 
         // Send the data selected from the table view to the Modify Part Menu.
@@ -202,7 +201,7 @@ public class MainScreenController implements Initializable{
 
     /** This method loads the Add Product JavaFX_Files.Controller in a new scene. */
     public void addProductButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/AddProductGUI.fxml");
+        changeScene(event, "../View/AddProductGUI.fxml");
     }
 
     /** Method to delete the selected product object from the Inventory class, while first checking if there are associated parts. */
@@ -242,7 +241,7 @@ public class MainScreenController implements Initializable{
             ModifyProductController.getCurrentProduct(selectedProduct);
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("View/ModifyProductGUI.fxml"));
+            loader.setLocation(getClass().getResource("../View/ModifyProductGUI.fxml"));
             loader.load();
 
             // Send the data selected from the table view to the Modify Part Menu.

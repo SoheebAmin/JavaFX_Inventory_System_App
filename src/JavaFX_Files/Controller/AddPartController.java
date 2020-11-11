@@ -159,7 +159,7 @@ public class AddPartController implements Initializable{
                 Inventory.addPart(new Outsourced(idToSet, name, price, inventory, min, max, companyName));
                 Inventory.setPartIdCount(idToSet); //sets the ID count as the new ID
             }
-            changeScene(event, "View/MainScreenGUI.fxml");
+            changeScene(event, "../View/MainScreenGUI.fxml");
         }
         return 0;
     }
@@ -167,7 +167,7 @@ public class AddPartController implements Initializable{
 
     /** This method returns to the MainScreenController without making any changes to the Inventory class. */
     public void cancelButtonClicked(ActionEvent event) throws IOException {
-        changeScene(event, "View/MainScreenGUI.fxml");
+        changeScene(event, "../View/MainScreenGUI.fxml");
     }
 
     /** This method wraps the common code to change scenes into method */
