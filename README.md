@@ -7,12 +7,12 @@ It is an inventory management system that allows the user to add, modify, and de
 
 # The Main Dashboard
 
-![Main Dashboard](central_dashboard.png?raw=true "Main Dashboard")
+![Main Dashboard](screen_shots/central_dashboard.png?raw=true "Main Dashboard")
 
 # The Add/Modify Part Scene
 
-![Modify Part](modify_part.png?raw=true "Modify Part")
+![Modify Part](screen_shots/modify_part.png?raw=true "Modify Part")
 
 # The Add/Modify Product Scene  
 
-![Modify Product](modify_product.png?raw=true "Modify Product")
+![Modify Product](screen_shots/modify_product.png?raw=true "Modify Product")
