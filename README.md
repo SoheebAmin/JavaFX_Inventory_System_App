@@ -20,4 +20,4 @@ There is validation to ensure that every piece of information given makes sense 
 
 # Error Example
 
-![Error](screen_shots/error.png?raw=true "Error")
+![Error](screen_shots/error.PNG?raw=true "Error")
